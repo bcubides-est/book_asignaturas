@@ -4,6 +4,8 @@ project:
 book:
   title: "ACTUARIAL"
   author: "Brayan Cubides"
+  repo-url: "https://github.com/tu_usuario/tu_repo_actuarial"
+  repo-branch: main
   favicon: logo.png
   description: "Material de curso de Actuarial"
   url: "/actuarial/"

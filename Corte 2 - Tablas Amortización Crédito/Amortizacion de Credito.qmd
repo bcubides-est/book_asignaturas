@@ -1,18 +1,13 @@
 ---
 title: "Amortizacion de Credito"
 author: "Brayan Cubides"
-
-format:
-  html:
-    theme: cosmo
-    page-layout: full
-    toc: true
-    toc-location: left
-    toc-depth: 2
-    #number-sections: true
-    code-tools: true
-    lightbox: true
-    self-contained: true   
+toc: true
+toc-location: right
+toc-depth: 2
+#number-sections: true
+code-tools: true
+lightbox: true
+self-contained: true   
 ---
 
 ## 1. Crédito a corto plazo: Cuota fija, pagos vencidos

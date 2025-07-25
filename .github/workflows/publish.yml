@@ -1,4 +1,4 @@
-name: Publish Quarto Book
+name: Publish Actuarial Book
 
 on:
   push:
@@ -8,12 +8,21 @@ jobs:
   build-deploy:
     runs-on: ubuntu-latest
 
+    # Trabajamos dentro de tu carpeta “9 CÁLCULO ACTUARIAL”
+    defaults:
+      run:
+        working-directory: "9 CÁLCULO ACTUARIAL"
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup Quarto
+      - name: Setup Quarto (y R)
         uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          install:
+            - r          # instala R en el runner
+            - quarto     # instala Quarto CLI
 
       - name: Render book
         run: quarto render
@@ -22,4 +31,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: _book
+          folder: "_book"   # carpeta de salida por defecto de un book
