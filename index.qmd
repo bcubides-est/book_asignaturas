@@ -2,4 +2,4 @@
 title: "INICIO"
 ---
 Bienvenido a la sección de Actuarial.\
-Selecciona en el menú izquierdo el tema que quieras ver. Todo
+Selecciona en el menú izquierdo el tema que quieras ver. 
