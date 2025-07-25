@@ -15,7 +15,7 @@ self-contained: true
 ```{r}
 
 library(readxl)
-qx_mujeres <- read_excel("Corte-3-Seguros/qx-hombres-y-mujeres.xls",
+qx_mujeres <- read_excel("qx-hombres-y-mujeres.xls",
                          sheet = "Asegurados - Muj",
                          col_types = c("numeric","numeric"))
 

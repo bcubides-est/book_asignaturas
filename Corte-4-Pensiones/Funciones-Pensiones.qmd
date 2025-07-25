@@ -20,7 +20,7 @@ Antes de la función definimos:
 
 ```{r, fig.width=20, fig.height=5, out.width="100%"} 
 library(readxl)
-qx_mujeres_rentistas <- read_excel("Corte-4-Pensiones/qx-mujeres-rentistas.xlsx",
+qx_mujeres_rentistas <- read_excel("qx-mujeres-rentistas.xlsx",
                                    col_types = c("numeric","numeric"))
 TablaMortalidad <- function(qx_df, col_qx, l0 = 100000) {
   edades <- qx_df$x

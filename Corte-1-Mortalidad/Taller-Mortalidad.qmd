@@ -19,9 +19,8 @@ rm(list = ls(all = TRUE))
 # Lectura y exploración de datos
 
 ```{r}
-qx <- read.delim("Corte-1-Mortalidad/q_X-TablaMortAseg.txt")
-colnames(qx)[colnames(qx) == "x"] <- "X"
-qx_truncado <- read.delim("Corte-1-Mortalidad/q_X_truncado-TablaMortAseg.txt")
+qx <- read.delim("q_X-TablaMortAseg.txt")
+qx_truncado <- read.delim("q_X_truncado-TablaMortAseg.txt")
 ```
 
 # Función **CrearTablaConEsperanza**
@@ -34,6 +33,7 @@ Calcula las siguientes columnas para un vector \(q_x\):
 - $$e^0_x = \frac{\sum_{j=i+1}^n l_j}{l_i} + 0.5$$: esperanza de vida  
 
 ```{r}
+colnames(qx)[colnames(qx) == "x"] <- "X"
 TablaMortalidad <- function(qx_df, col_qx, l0 = 100000) {
   edades <- qx_df$X
   qx     <- qx_df[[col_qx]]
