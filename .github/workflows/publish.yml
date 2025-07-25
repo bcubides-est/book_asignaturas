@@ -15,12 +15,12 @@ jobs:
       - name: Setup Quarto & R
         uses: quarto-dev/quarto-actions/setup@v2
         with:
-          install: ["r", "quarto"]
+          install: "r, quarto"    # <- cadena, no lista
 
       - name: Render book
         run: |
           cd "9 CÁLCULO ACTUARIAL"
-          quarto render
+          quarto render --no-execute
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
