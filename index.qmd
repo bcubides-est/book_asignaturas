@@ -9,4 +9,4 @@ toc-location: right
 
 # Bienvenido a la sección de Actuarial {.unnumbered}
 
-Selecciona en el menú izquierdo el tema que quieras ver.
+Selecciona el tema que quieras ver.
