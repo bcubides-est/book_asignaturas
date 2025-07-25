@@ -19,7 +19,7 @@ jobs:
 
       - name: Render book
         run: |
-          cd "9 CÁLCULO ACTUARIAL"
+          cd "9-calculo-actuarial"
           quarto render --no-execute
 
       - name: Deploy to GitHub Pages

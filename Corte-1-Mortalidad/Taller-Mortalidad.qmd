@@ -14,7 +14,7 @@ self-contained: true
 
 ```{r}
 rm(list = ls(all = TRUE))
-setwd("C:/Users/cubid/Desktop/QUARTO - MATERIAS UNAL/9 CÁLCULO ACTUARIAL/Corte 1 - Mortalidad")
+setwd("C:/Users/cubid/Desktop/QUARTO - MATERIAS UNAL/9-calculo-actuarial/Corte-1-Mortalidad")
 ```
 
 # Lectura y exploración de datos

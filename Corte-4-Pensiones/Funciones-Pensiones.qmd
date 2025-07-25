@@ -20,7 +20,7 @@ Antes de la función definimos:
 
 ```{r, fig.width=20, fig.height=5, out.width="100%"} 
 library(readxl)
-setwd("C:/Users/cubid/Desktop/QUARTO - MATERIAS UNAL/9 CÁLCULO ACTUARIAL/Corte 4 - Pensiones")
+setwd("C:/Users/cubid/Desktop/QUARTO - MATERIAS UNAL/9-calculo-actuarial/Corte-4-Pensiones")
 qx_mujeres_rentistas <- read_excel("qx mujeres rentistas.xlsx",
                                    col_types = c("numeric","numeric"))
 TablaMortalidad <- function(qx_df, col_qx, l0 = 100000) {
