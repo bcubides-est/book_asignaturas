@@ -13,7 +13,7 @@ book:
   sidebar:
     tools:
       - icon: globe
-        href: https://bcubides.quarto.pub/
+        href: https://github.com/bcubides-est/
         text: "Ir a mi web"
     logo: logo.png
     search: true               # buscador
