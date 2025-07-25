@@ -17,7 +17,6 @@ book:
         text: "Ir a mi web"
     logo: logo.png
     search: true               # buscador
-  repo-branch: main
   repo-actions: [edit, issue, source]
   #sharing: [twitter, linkedin, facebook]  # botones de compartir
   #downloads: [pdf]             # botón de descarga PDF
