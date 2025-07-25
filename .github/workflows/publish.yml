@@ -8,10 +8,6 @@ jobs:
   build-deploy:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: "calculo-actuarial"  # aquí tu carpeta exacta
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -22,11 +18,10 @@ jobs:
           install: "r, quarto"
 
       - name: Render book
-        run: quarto render --no-execute
+        run: quarto render   # <-- sin --no-execute si usas R chunks
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: "_book"   # ya estás en 9-calculo-actuarial, así que sólo _book
-
+          folder: _book
