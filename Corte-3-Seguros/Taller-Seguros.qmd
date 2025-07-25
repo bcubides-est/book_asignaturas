@@ -13,10 +13,9 @@ self-contained: true
 # Preparación de datos y parámetros
 
 ```{r}
-setwd("C:/Users/cubid/Desktop/QUARTO - MATERIAS UNAL/9-calculo-actuarial/Corte-3-Seguros")
 
 library(readxl)
-qx_mujeres <- read_excel("qx hombres y mujeres.xls",
+qx_mujeres <- read_excel("Corte-3-Seguros/qx-hombres-y-mujeres.xls",
                          sheet = "Asegurados - Muj",
                          col_types = c("numeric","numeric"))
 

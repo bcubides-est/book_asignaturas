@@ -19,9 +19,9 @@ rm(list = ls(all = TRUE))
 # Lectura y exploración de datos
 
 ```{r}
-qx <- read.delim("q_X - TablaMortAseg.txt")
+qx <- read.delim("Corte-1-Mortalidad/q_X-TablaMortAseg.txt")
 colnames(qx)[colnames(qx) == "x"] <- "X"
-qx_truncado <- read.delim("q_X_truncado - TablaMortAseg.txt")
+qx_truncado <- read.delim("Corte-1-Mortalidad/q_X_truncado-TablaMortAseg.txt")
 ```
 
 # Función **CrearTablaConEsperanza**
