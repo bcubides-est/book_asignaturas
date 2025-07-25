@@ -10,7 +10,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: "9-calculo-actuarial"  # aquí tu carpeta exacta
+        working-directory: "calculo-actuarial"  # aquí tu carpeta exacta
 
     steps:
       - name: Checkout code
