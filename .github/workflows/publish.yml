@@ -8,6 +8,10 @@ jobs:
   build-deploy:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: "9-calculo-actuarial"  # aquí tu carpeta exacta
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -15,16 +19,14 @@ jobs:
       - name: Setup Quarto & R
         uses: quarto-dev/quarto-actions/setup@v2
         with:
-          install: "r, quarto"    # <- cadena, no lista
+          install: "r, quarto"
 
       - name: Render book
-        run: |
-          cd "9-calculo-actuarial"
-          quarto render --no-execute
+        run: quarto render --no-execute
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: "9-calculo-actuarial/_book"
+          folder: "_book"   # ya estás en 9-calculo-actuarial, así que sólo _book
 
