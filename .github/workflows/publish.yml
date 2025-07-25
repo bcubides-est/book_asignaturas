@@ -8,27 +8,23 @@ jobs:
   build-deploy:
     runs-on: ubuntu-latest
 
-    # Trabajamos dentro de tu carpeta “9 CÁLCULO ACTUARIAL”
-    defaults:
-      run:
-        working-directory: "9 CÁLCULO ACTUARIAL"
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup Quarto (y R)
+      - name: Setup Quarto & R
         uses: quarto-dev/quarto-actions/setup@v2
         with:
-          install:
-            - r          # instala R en el runner
-            - quarto     # instala Quarto CLI
+          install: ["r", "quarto"]
 
       - name: Render book
-        run: quarto render
+        run: |
+          cd "9 CÁLCULO ACTUARIAL"
+          quarto render
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: "_book"   # carpeta de salida por defecto de un book
+          folder: "9 CÁLCULO ACTUARIAL/_book"
+
