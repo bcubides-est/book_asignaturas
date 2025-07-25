@@ -1,5 +1,10 @@
 ---
 title: "INICIO"
+code-tools: true
+lightbox: true
+toc: true
+toc-location: right
+#number-sections: true
 ---
 
 # Bienvenido a la sección de Actuarial {.unnumbered}
