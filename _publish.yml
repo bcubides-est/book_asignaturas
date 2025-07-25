@@ -1,0 +1,4 @@
+- source: project
+  quarto-pub:
+    - id: c3b88684-cfc5-4701-85ac-11fc68efeed5
+      url: https://bcubides.quarto.pub/actuarial

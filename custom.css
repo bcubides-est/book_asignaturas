@@ -1,0 +1,14 @@
+/* custom.css */
+/* Botón “dark-mode” cuando el tema superhero está activo */
+body[data-bs-theme="dark"] .navbar .btn-primary {
+  background-color: #000 !important;   /* fondo negro */
+  border-color: #444 !important;       /* borde gris oscuro */
+  color: #fff !important;
+}
+
+/* (opcional) quita el azul del hover */
+body[data-bs-theme="dark"] .navbar .btn-primary:hover {
+  background-color: #222 !important;
+  border-color: #666 !important;
+}
+}

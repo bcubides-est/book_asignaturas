@@ -1,0 +1,38 @@
+project:
+  type: book
+
+book:
+  title: "ACTUARIAL"
+  author: "Brayan Cubides"
+  favicon: logo.png
+  description: "Material de curso de Actuarial"
+  url: "/actuarial/"
+  page-navigation: true        # prev/next
+  sidebar:
+    tools:
+      - icon: globe
+        href: https://bcubides.quarto.pub/
+        text: "Ir a mi web"
+    logo: logo.png
+    search: true               # buscador
+  repo-branch: main
+  repo-actions: [edit, issue, source]
+  #sharing: [twitter, linkedin, facebook]  # botones de compartir
+  #downloads: [pdf]             # botón de descarga PDF
+  image: logo.png
+
+  chapters:
+    - index.qmd
+    - Corte 1 - Mortalidad/Tablas de Mortalidad.qmd
+    - Corte 1 - Mortalidad/Taller Mortalidad.qmd
+    - Corte 2 - Tablas Amortización Crédito/Amortizacion de Credito.qmd
+    - Corte 3 - Seguros/Taller Seguros.qmd
+    - Corte 4 - Pensiones/Funciones Pensiones.qmd
+
+format:
+  html:
+    theme:
+      light: cosmo
+      dark: darkly
+    code-fold: false
+    css: custom.css

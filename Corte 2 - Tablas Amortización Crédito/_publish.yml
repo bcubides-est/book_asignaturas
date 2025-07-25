@@ -1,0 +1,4 @@
+- source: Tablas_Amortizacion_de_Credito_Quarto.qmd
+  quarto-pub:
+    - id: 13299313-26c6-45c7-bd1c-87dfef26c24a
+      url: https://bcubides.quarto.pub/tablas_amortizacion_de_credito_quarto

@@ -1,0 +1,160 @@
+---
+title: "Funciones Pensiones"
+author: "Brayan Cubides"
+toc: true
+toc-location: right
+toc-depth: 2
+#number-sections: true
+code-tools: true
+lightbox: true
+self-contained: true   
+---
+
+## 1. Tabla de mortalidad
+
+Antes de la función definimos:
+
+- $l_0 = 100\,000$  
+- $d_x = l_x \, q_x$  
+- $l_{x+1} = l_x - d_x$
+
+```{r, fig.width=20, fig.height=5, out.width="100%"} 
+library(readxl)
+setwd("C:/Users/cubid/Desktop/QUARTO - MATERIAS UNAL/9 CÁLCULO ACTUARIAL/Corte 4 - Pensiones")
+qx_mujeres_rentistas <- read_excel("qx mujeres rentistas.xlsx",
+                                   col_types = c("numeric","numeric"))
+TablaMortalidad <- function(qx_df, col_qx, l0 = 100000) {
+  edades <- qx_df$x
+  qx     <- qx_df[[col_qx]]
+  n      <- length(qx)
+  lx <- dx <- numeric(n)
+  lx[1] <- l0
+  for(i in seq_len(n - 1)) {
+    dx[i]   <- lx[i] * qx[i]
+    lx[i+1] <- lx[i] - dx[i]
+  }
+  dx[n] <- lx[n] * qx[n]
+  data.frame(x = edades, qx = round(qx,6), lx = round(lx))
+}
+tabla_Rentistas_Mujeres <- TablaMortalidad(qx_mujeres_rentistas, "qx")
+head(tabla_Rentistas_Mujeres)
+```
+
+## 2. Mesada pensional — Fondo Privado
+
+**Fórmulas:**
+
+1. Anualidad temporal:
+
+   $$
+     a_{\bar n|e} = \frac{1 - (1+e)^{-n}}{e}
+   $$
+2. Valor presente acumulado (fraccional y unitario):
+
+   $$
+     (VP)^{(m)}_{\bar n|e} = m\;\frac{i}{i^{(m)}}\;\frac{1}{1+r}\;a_{\bar n|e},\quad
+     (VP)^{(1)}_{\bar n|e} = \frac{1}{1+r}\;a_{\bar n|e}
+   $$
+3. Valor presente total y futuro:
+
+   $$
+     (VP)_{\bar n|e} = (VP)^{(m)}_{\bar n|e} + (VP)^{(1)}_{\bar n|e},\quad
+     (VF)_{\bar n|e} = (VP)^{(m)}_{\bar n|e}\,(1+e)^n
+   $$
+4. Valor presente en edad $x$:
+
+   $$
+     D_x(e) = (1+e)^{-(t-x)}\,l_t,\quad
+     N_x(e) = \sum_{t=x+1}^\infty D_t(e),\quad
+     a_{\bar x|e} = \frac{N_x(e)}{D_x(e)}
+   $$
+5. Prima de reemplazo:
+
+   $$
+     \text{tasa}_{\text{rep}} = \frac{(VF)_{\bar n|e}}{(VP)_x}\;\times\;\text{tasa\_cotización},\quad
+     \text{mesada} = \text{salario} \times \text{tasa}_{\text{rep}}
+   $$
+
+```{r, fig.width=20, fig.height=5, out.width="100%"} 
+e <- 0.03; r <- 0.0788; i <- 0.1112; m <- 12
+tasa_cotizacion <- 0.115
+edades <- tabla_Rentistas_Mujeres$x
+
+mesada_privada <- function(salario_mensual, n, edad, lx) {
+  v   <- 1/(1+r)
+  i_m <- m*((1+i)^(1/m)-1)
+  # 1) VP y VF
+  a_n_e   <- (1-(1+e)^(-n))/e
+  VPm     <- m*i/i_m * v * a_n_e
+  VP1     <- v * a_n_e
+  VP_n_e  <- VPm + VP1
+  VF_n_e  <- VP_n_e * (1+e)^n
+  # 2) VP_x y a_x_e
+  idx     <- match(edad, edades)
+  ages    <- edades[idx:length(edades)]
+  lx_sub  <- lx[idx:length(lx)]
+  k_sub   <- ages - edad
+  Dxe     <- (1+e)^(-k_sub) * lx_sub
+  Nxe     <- sum(Dxe[-1]); Dxe0 <- Dxe[1]
+  a_x_e   <- Nxe / Dxe0
+  VP_x    <- 12*(a_x_e/(1+r)*(1+r*(m-1)/(2*m)) + (m-1)/(2*m)) +
+             a_x_e/(1+r)
+  # 3) mesada
+  tasa_rep <- (VF_n_e / VP_x) * tasa_cotizacion
+  salario_mensual * tasa_rep
+}
+
+mesada_privada(7.7 * 1423500, n = 25, edad = 57,
+               lx = tabla_Rentistas_Mujeres$lx)
+```
+
+## 3. Mesada pensional — Fondo Público
+
+**Reglas:**
+
+$$
+\text{tasa}_{\text{rep}} =
+\begin{cases}
+0.65 - 0.005\,S, & n = 25,\\
+0.65 - 0.005\,S + 0.015\,(n-25), & n > 25.
+\end{cases}
+$$
+Asumiendo que cada año tuviera 50 semanas solamente.
+
+Y si la mesada es menos de un salario mínimo, el estado subsidiara el restante así sea fondo privado o público.
+
+```{r, fig.width=20, fig.height=5, out.width="100%"} 
+SMLV <- 1423500
+mesada_publica <- function(salario_mensual, n) {
+  S <- salario_mensual / SMLV
+  tasa_rep <- if(n==25) {
+    0.65 - 0.005*S
+  } else if(n>25) {
+    0.65 - 0.005*S + 0.015*(n-25)
+  } else stop("Años < 25 no aplican")
+  salario_mensual * tasa_rep
+}
+
+mesada_publica(2.3 * SMLV, n = 25)
+```
+
+## 4. Mesada bajo reforma combinada
+
+Se aplica pública hasta $2.3$ SMLV y privada sobre el exceso.
+
+```{r, fig.width=20, fig.height=5, out.width="100%"} 
+mesada_actual <- function(salario_mensual, n, edad, lx) {
+  limite <- 2.3 * SMLV
+  if (salario_mensual <= limite) {
+    mesada_publica(salario_mensual, n)
+  } else {
+    mp    <- mesada_publica(limite, n)
+    exceso<- salario_mensual - limite
+    mpr   <- mesada_privada(exceso, n, edad, lx)
+    mp + mpr
+  }
+}
+
+mesada_actual(10 * SMLV, n = 25, edad = 57,
+              lx = tabla_Rentistas_Mujeres$lx)
+```
