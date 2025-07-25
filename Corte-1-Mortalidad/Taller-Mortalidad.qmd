@@ -82,4 +82,3 @@ head(tabla_Hombres_Asegurados)
 tabla_Mujeres_aseguradas <- TablaMortalidad(qx_truncado, col_qx = "qxM", l0 = 100000)
 head(tabla_Mujeres_aseguradas)
 ```
-
