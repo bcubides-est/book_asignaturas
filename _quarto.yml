@@ -25,11 +25,11 @@ book:
 
   chapters:
     - index.qmd
-    - Corte 1 - Mortalidad/Tablas de Mortalidad.qmd
-    - Corte 1 - Mortalidad/Taller Mortalidad.qmd
-    - Corte 2 - Tablas Amortización Crédito/Amortizacion de Credito.qmd
-    - Corte 3 - Seguros/Taller Seguros.qmd
-    - Corte 4 - Pensiones/Funciones Pensiones.qmd
+    - Corte-1-Mortalidad/Tablas-de-Mortalidad.qmd
+    - Corte-1-Mortalidad/Taller-Mortalidad.qmd
+    - Corte-2-Tablas-Amortizacion-Credito/Amortizacion-de-Credito.qmd
+    - Corte-3-Seguros/Taller-Seguros.qmd
+    - Corte-4-Pensiones/Funciones-Pensiones.qmd
 
 format:
   html:
