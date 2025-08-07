@@ -12,3 +12,14 @@ body[data-bs-theme="dark"] .navbar .btn-primary:hover {
   border-color: #666 !important;
 }
 }
+/* Ajuste de íconos de acción */
+.quarto-actions .quarto-action {
+  margin-left: 0.5rem;
+}
+
+.quarto-action-maximize-2 svg,
+.quarto-action-printer svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: currentColor;
+}

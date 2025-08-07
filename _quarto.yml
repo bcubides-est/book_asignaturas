@@ -35,5 +35,24 @@ format:
     theme:
       light: cosmo
       dark: darkly
-    code-fold: false
     css: custom.css
+    code-fold: false
+
+    # <<< aquí los actions >>>
+    actions:
+      - icon: maximize-2      # icono de pantalla completa
+        title: "Pantalla completa"
+        onclick: |
+          (()=>{
+            const doc = document.documentElement;
+            if (!document.fullscreenElement) {
+              doc.requestFullscreen();
+            } else {
+              document.exitFullscreen();
+            }
+          })();
+
+      - icon: printer         # icono de impresora
+        title: "Imprimir (Ctrl+P)"
+        onclick: "window.print();"
+
