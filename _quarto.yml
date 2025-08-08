@@ -37,7 +37,7 @@ book:
 format:
   html:
     theme:
-      light: cosmo
+      light: cerulean #simplex 
       dark: cyborg
     css: custom.css
     code-fold: false
