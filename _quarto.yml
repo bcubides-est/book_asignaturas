@@ -4,7 +4,7 @@ project:
 book:
   title: "ACTUARIAL"
   author: "Brayan Cubides"
-  repo-url: "https://github.com/tu_usuario/tu_repo_actuarial"
+  repo-url: "https://github.com/bcubides-est/actuarial"
   repo-branch: main
   favicon: logo.png
   description: "Material de curso de Actuarial"
@@ -12,12 +12,16 @@ book:
   page-navigation: true        # prev/next
   sidebar:
     tools:
-      - icon: globe
-        href: https://bcubides-est.github.io/website/
-        text: "Ir a mi web"
+    - icon: globe
+      href: https://bcubides-est.github.io/website/
+      text: "Ir a mi web"
+
+    - icon: download
+      href: 'javascript:window.print()'
+      text: "Descargar (PDF)"
     logo: logo.png
     search: true               # buscador
-  repo-actions: [edit, issue, source]
+  #repo-actions: [edit, issue, source]
   #sharing: [twitter, linkedin, facebook]  # botones de compartir
   #downloads: [pdf]             # botón de descarga PDF
   image: logo.png
@@ -34,25 +38,6 @@ format:
   html:
     theme:
       light: cosmo
-      dark: darkly
+      dark: cyborg
     css: custom.css
     code-fold: false
-
-    # <<< aquí los actions >>>
-    actions:
-      - icon: maximize-2      # icono de pantalla completa
-        title: "Pantalla completa"
-        onclick: |
-          (()=>{
-            const doc = document.documentElement;
-            if (!document.fullscreenElement) {
-              doc.requestFullscreen();
-            } else {
-              document.exitFullscreen();
-            }
-          })();
-
-      - icon: printer         # icono de impresora
-        title: "Imprimir (Ctrl+P)"
-        onclick: "window.print();"
-
