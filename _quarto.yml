@@ -2,13 +2,13 @@ project:
   type: book
 
 book:
-  title: "ACTUARIAL"
+  title: "MATERIAL DE PREGRADO"
   author: "Brayan Cubides"
   repo-url: "https://github.com/bcubides-est/actuarial"
   repo-branch: main
   favicon: logo.png
-  description: "Material de curso de Actuarial"
-  url: "/actuarial/"
+  description: "Material de cada Curso"
+  url: "/book_asignaturas/"
   page-navigation: true        # prev/next
   sidebar:
     tools:
@@ -25,14 +25,17 @@ book:
   #sharing: [twitter, linkedin, facebook]  # botones de compartir
   #downloads: [pdf]             # botón de descarga PDF
   image: logo.png
-
+  downloads: [pdf] 
+  
   chapters:
     - index.qmd
-    - Corte-1-Mortalidad/Tablas-de-Mortalidad.qmd
-    - Corte-1-Mortalidad/Taller-Mortalidad.qmd
-    - Corte-2-Tablas-Amortizacion-Credito/Amortizacion-de-Credito.qmd
-    - Corte-3-Seguros/Taller-Seguros.qmd
-    - Corte-4-Pensiones/Funciones-Pensiones.qmd
+    - CALCULO_ACTUARIAL/index.qmd
+    - CALCULO_ACTUARIAL/Corte-1-Mortalidad/Tablas-de-Mortalidad.qmd
+    - CALCULO_ACTUARIAL/Corte-1-Mortalidad/Taller-Mortalidad.qmd
+    - CALCULO_ACTUARIAL/Corte-2-Tablas-Amortizacion-Credito/Amortizacion-de-Credito.qmd
+    - CALCULO_ACTUARIAL/Corte-3-Seguros/Taller-Seguros.qmd
+    - CALCULO_ACTUARIAL/Corte-4-Pensiones/Funciones-Pensiones.qmd
+    - SERIES_DE_TIEMPO/index.qmd
 
 format:
   html:

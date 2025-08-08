@@ -1,0 +1,133 @@
+---
+title: "P8 - Intervencion_Quarto"
+author: "Brayan Cubides"
+
+format:
+  html:
+    theme: cosmo
+    page-layout: full
+    toc: true
+    toc-location: left
+    toc-depth: 2
+    #number-sections: true
+    code-tools: true
+    lightbox: true
+    self-contained: true   
+---
+
+## Descripción del ejercicio
+
+1. **Instalación y carga** de los paquetes necesarios.  
+2. **Simulación** de una serie ARIMA(1,1,1).  
+3. **Intervención puntual** en $t=50$.  
+4. **Ajuste** de un ARIMA con variable de intervención (ARIMAX).  
+5. **Pronóstico** incorporando la intervención.  
+6. **Visualización** de resultados.
+
+---
+
+## 1. Instalación y carga
+
+```{r, fig.width=20, fig.height=5, out.width="100%", include=FALSE}
+#install.packages("forecast")
+library(forecast)
+```
+
+---
+
+## 2. Simulación de la serie ARIMA(1,1,1)
+
+Simulamos  
+$$
+(1 - 0.5B)(1-B)Y_t = (1 + 0.5B)\,w_t
+$$
+con $n=100$.
+
+```{r, fig.width=20, fig.height=5, out.width="100%"}
+set.seed(123)
+sim_data <- arima.sim(n = 100, list(order = c(1, 1, 1), ar = 0.5, ma = 0.5))
+# Ajustar a 100 observaciones
+sim_data <- sim_data[-1]
+layout(matrix(c(1,1,2, 1,1,3), nc=2))
+par(mar = c(3,3,2,1), mgp = c(1.6, .6, 0))
+
+plot(sim_data, type="l", ylim = c(-15,40), main = "Simulación ARIMA(1,1,1)")
+acf(sim_data, main = "ACF de la serie simulada")
+pacf(sim_data, main = "PACF de la serie simulada")
+```
+
+**Interpretación:** ACF/PACF muestran decaimiento exponencial típico de ARMA con integración.
+
+---
+
+## 3. Introducción de la intervención
+
+Creamos un **dummy** de paso en $t=50$ y añadimos un salto de +10:
+
+```{r, fig.width=20, fig.height=5, out.width="100%"}
+intervention <- rep(0, 100)
+intervention[50:100] <- 1 #A partir del dato 50 lo vuelve 1
+sim_data[50:100] <- sim_data[50:100] + 10 #sumar 10 a partir del datos 50 (es el tamaño del impacto)
+
+plot(sim_data, type="l", ylim = c(-15,40), main = "Serie con intervención en t=50")
+acf(sim_data, main = "ACF tras intervención")
+pacf(sim_data, main = "PACF tras intervención")
+```
+
+---
+
+## 4. Ajuste del modelo ARIMAX
+
+Ajustamos  
+$$
+Y_t = \text{ARIMA}(1,1,1) + \beta\,I_t + e_t
+$$
+donde $I_t$ es el dummy de intervención.
+
+```{r, fig.width=20, fig.height=5, out.width="100%"}
+# Ajuste automático con regresor
+model <- auto.arima(sim_data, xreg = intervention)
+#Es importante ponerle el xreg, que es el outlier de escalon, o sino, cambia la dinámica de la serie
+
+# Resultados del ajuste
+summary(model)
+```
+
+**Interpretación:** El coeficiente de `intervention` estima el efecto puntual (nivel) tras $t=50$.
+
+---
+
+## 5. Pronóstico con intervención
+
+Pronosticamos 12 pasos, asumiendo el dummy activo ($I_t=1$):
+
+```{r, fig.width=20, fig.height=5, out.width="100%"}
+forecast_values <- forecast(model, xreg = rep(1, 12)) 
+#La variable hexogena (outlier) añade 1's en esos 12 adelantos que no tenía registro
+```
+
+---
+
+## 6. Visualización de resultados
+
+```{r, fig.width=20, fig.height=5, out.width="100%"}
+par(mfrow = c(1,1))
+plot(forecast_values, main = "Pronóstico con intervención")
+lines(sim_data, col = "blue")
+abline(v = 50, col = "red", lty = 2)
+legend(
+  "bottomright",
+  legend = c("Datos simulados", "Intervención (t=50)", "Pronóstico"),
+  col    = c("blue", "red", "black"),
+  lty    = c(1, 2, 1)
+)
+```
+
+---
+
+## Usos y notas prácticas
+
+- **Modelos ARIMAX** permiten cuantificar el impacto de un choque o política puntual.  
+- La variable de intervención $I_t$ puede representar subsidios, promociones, cambios regulatorios, etc.  
+- Evaluar la **significancia** del coeficiente $\beta$ indica si la intervención produjo un cambio duradero en nivel.  
+- Este enfoque es básico para estudios de evaluación de impacto en series temporales.  

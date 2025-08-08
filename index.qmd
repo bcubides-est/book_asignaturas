@@ -1,12 +1,10 @@
 ---
-title: "INICIO"
-code-tools: true
-lightbox: true
-toc: true
-toc-location: right
-#number-sections: true
+title: "Inicio"
 ---
 
-# Bienvenido a la sección de Actuarial {.unnumbered}
+# Bienvenido
 
-Selecciona el tema que quieras ver.
+Selecciona un curso:
+
+- [ACTUARIAL](CALCULO_ACTUARIAL/index.qmd)
+- [SERIES DE TIEMPO](SERIES_DE_TIEMPO/index.qmd)

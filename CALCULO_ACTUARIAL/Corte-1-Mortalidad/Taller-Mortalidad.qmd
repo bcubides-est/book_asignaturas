@@ -1,0 +1,84 @@
+---
+title: "Taller Mortalidad"
+author: "Brayan Cubides"
+toc: true
+toc-location: right
+toc-depth: 2
+#number-sections: true
+code-tools: true
+lightbox: true
+self-contained: true   
+---
+
+# Limpieza de entorno y directorio
+
+```{r}
+rm(list = ls(all = TRUE))
+```
+
+# Lectura y exploración de datos
+
+```{r}
+qx <- read.delim("q_X-TablaMortAseg.txt")
+qx_truncado <- read.delim("q_X_truncado-TablaMortAseg.txt")
+```
+
+# Función **CrearTablaConEsperanza**
+
+Calcula las siguientes columnas para un vector \(q_x\):
+
+- $$p_x = 1 - q_x$$  
+- $$l_x$$: número de personas vivas a cada edad  
+- $$d_x = l_x \, q_x$$: defunciones  
+- $$e^0_x = \frac{\sum_{j=i+1}^n l_j}{l_i} + 0.5$$: esperanza de vida  
+
+```{r}
+colnames(qx)[colnames(qx) == "x"] <- "X"
+TablaMortalidad <- function(qx_df, col_qx, l0 = 100000) {
+  edades <- qx_df$X
+  qx     <- qx_df[[col_qx]]
+  n      <- length(qx)
+
+  px <- 1 - qx
+  lx <- dx <- numeric(n)
+  lx[1] <- l0
+  
+  # l_x
+  for(i in seq_len(n - 1)) {
+    dx[i]   <- lx[i] * qx[i]
+    lx[i+1] <- lx[i] - dx[i]
+  }
+  # última edad
+  dx[n] <- lx[n] * qx[n]
+  
+  # e^0_x = (sum_{j>i} l_j)/l_i + 1/2
+  e0x <- numeric(n)
+  for(i in seq_len(n)) {
+    if(i < n) {e0x[i] <- sum(lx[(i+1):n]) / lx[i] + 0.5
+    } else {e0x[i] <- 0.5}
+  }
+  data.frame(x   = edades, qx  = round(qx,6), px  = round(px,6), lx  = round(lx), dx  = round(dx,1), e0x = round(e0x,1))
+}
+```
+
+# Generar tablas de mortalidad completas
+
+```{r}
+tabla_Rentistas_Hombres <- TablaMortalidad(qx, col_qx = "qxH", l0 = 100000)
+head(tabla_Rentistas_Hombres)
+
+tabla_Rentistas_Mujeres <- TablaMortalidad(qx, col_qx = "qxM", l0 = 100000)
+head(tabla_Rentistas_Mujeres)
+
+tabla_invalidos_Hombres <- TablaMortalidad(qx, col_qx = "qxiH", l0 = 100000)
+head(tabla_invalidos_Hombres)
+
+tabla_invalidos_Mujeres <- TablaMortalidad(qx, col_qx = "qxiM", l0 = 100000)
+head(tabla_invalidos_Mujeres)
+
+tabla_Hombres_Asegurados <- TablaMortalidad(qx_truncado, col_qx = "qxH", l0 = 100000)
+head(tabla_Hombres_Asegurados)
+
+tabla_Mujeres_aseguradas <- TablaMortalidad(qx_truncado, col_qx = "qxM", l0 = 100000)
+head(tabla_Mujeres_aseguradas)
+```

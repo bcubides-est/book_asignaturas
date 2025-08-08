@@ -1,0 +1,6 @@
+- source: Funciones_Pensiones_Quarto.qmd
+  quarto-pub:
+    - id: 639dcaa4-a108-4a5a-bd25-e9b916814c44
+      url: https://bcubides.quarto.pub/funciones-pensiones-quarto---cálculo-actuarial
+    - id: 8e666409-a3aa-4cd1-be63-1cad1fd8d35d
+      url: https://bcubides.quarto.pub/funciones_pensiones_quarto

@@ -1,4 +1,4 @@
-name: Publish Actuarial Book
+name: Publish Book Asignaturas
 
 on:
   push:
