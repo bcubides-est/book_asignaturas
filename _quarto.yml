@@ -25,7 +25,6 @@ book:
   #sharing: [twitter, linkedin, facebook]  # botones de compartir
   #downloads: [pdf]             # botón de descarga PDF
   image: logo.png
-  downloads: [pdf] 
   
   chapters:
     - index.qmd
