@@ -20,21 +20,23 @@ book:
       href: 'javascript:window.print()'
       text: "Descargar (PDF)"
     logo: logo.png
-    search: true               # buscador
-  #repo-actions: [edit, issue, source]
-  #sharing: [twitter, linkedin, facebook]  # botones de compartir
-  #downloads: [pdf]             # botón de descarga PDF
+    search: true    
   image: logo.png
   
   chapters:
     - index.qmd
-    - CALCULO_ACTUARIAL/index.qmd
-    - CALCULO_ACTUARIAL/Corte-1-Mortalidad/Tablas-de-Mortalidad.qmd
-    - CALCULO_ACTUARIAL/Corte-1-Mortalidad/Taller-Mortalidad.qmd
-    - CALCULO_ACTUARIAL/Corte-2-Tablas-Amortizacion-Credito/Amortizacion-de-Credito.qmd
-    - CALCULO_ACTUARIAL/Corte-3-Seguros/Taller-Seguros.qmd
-    - CALCULO_ACTUARIAL/Corte-4-Pensiones/Funciones-Pensiones.qmd
-    - SERIES_DE_TIEMPO/index.qmd
+    - part: "ACTUARIAL"
+      link: CALCULO_ACTUARIAL/index.qmd
+      chapters:
+        - CALCULO_ACTUARIAL/Corte-1-Mortalidad/Tablas-de-Mortalidad.qmd
+        - CALCULO_ACTUARIAL/Corte-1-Mortalidad/Taller-Mortalidad.qmd
+        - CALCULO_ACTUARIAL/Corte-2-Tablas-Amortizacion-Credito/Amortizacion-de-Credito.qmd
+        - CALCULO_ACTUARIAL/Corte-3-Seguros/Taller-Seguros.qmd
+        - CALCULO_ACTUARIAL/Corte-4-Pensiones/Funciones-Pensiones.qmd
+    - part: "SERIES DE TIEMPO"
+      link: SERIES_DE_TIEMPO/index.qmd
+      chapters:
+        - SERIES_DE_TIEMPO/index.qmd
 
 format:
   html:
@@ -43,3 +45,5 @@ format:
       dark: cyborg
     css: custom.css
     code-fold: false
+    toc-collapse: true  # Listas desplegables contraídas por defecto
+    toc-depth: 1
