@@ -23,8 +23,44 @@ jobs:
       - name: Install R packages (si usas renv)
         uses: r-lib/actions/setup-renv@v2
 
-      - name: Render book
-        run: quarto render
+      # Nuevos pasos de renderizado divididos
+      - name: Render CALCULO_ACTUARIAL - Corte 1
+        run: |
+          quarto render CALCULO_ACTUARIAL/Corte-1-Mortalidad/Tablas-de-Mortalidad.qmd --execute
+          quarto render CALCULO_ACTUARIAL/Corte-1-Mortalidad/Taller-Mortalidad.qmd --execute
+
+      - name: Render CALCULO_ACTUARIAL - Corte 2
+        run: |
+          quarto render CALCULO_ACTUARIAL/Corte-2-Tablas-Amortizacion-Credito/Amortizacion-de-Credito.qmd --execute
+
+      - name: Render CALCULO_ACTUARIAL - Corte 3
+        run: |
+          quarto render CALCULO_ACTUARIAL/Corte-3-Seguros/Taller-Seguros.qmd --execute
+
+      - name: Render CALCULO_ACTUARIAL - Corte 4
+        run: |
+          quarto render CALCULO_ACTUARIAL/Corte-4-Pensiones/Funciones-Pensiones.qmd --execute
+
+      - name: Render SERIES DE TIEMPO - Parte 1
+        run: |
+          quarto render SERIES_DE_TIEMPO/P0_Repaso_y_Graf_ST_Quarto.qmd --execute
+          quarto render SERIES_DE_TIEMPO/P1_ACF_muestral_Quarto.qmd --execute
+          quarto render SERIES_DE_TIEMPO/P1_others_Quarto.qmd --execute
+          quarto render SERIES_DE_TIEMPO/Tarea_1_ACF_Quarto.qmd --execute
+
+      - name: Render SERIES DE TIEMPO - Parte 2
+        run: |
+          quarto render SERIES_DE_TIEMPO/P2_ACF_PACF_para_AR_y_MA_Quarto.qmd --execute
+          quarto render SERIES_DE_TIEMPO/P3_ARMA_estacionariedad_Quarto.qmd --execute
+          quarto render SERIES_DE_TIEMPO/P4_ARMA_Box_Jenkins_Quarto.qmd --execute
+          quarto render SERIES_DE_TIEMPO/P5_MEE_FK_Quarto.qmd --execute
+
+      - name: Render SERIES DE TIEMPO - Parte 3
+        run: |
+          quarto render SERIES_DE_TIEMPO/P6_SARIMA_Quarto.qmd --execute
+          quarto render SERIES_DE_TIEMPO/P7_Ajuste_modelos_SARIMA_Quarto.qmd --execute
+          quarto render SERIES_DE_TIEMPO/P8_Intervencion_Quarto.qmd --execute
+          quarto render SERIES_DE_TIEMPO/P9_Outliers_Quarto.qmd --execute
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
