@@ -1,0 +1,207 @@
+---
+title: "Transformación Box-Cox - Suavizado - Preblanqueo - CCF"
+author: "Brayan Cubides"
+toc: true
+toc-location: right
+toc-depth: 2
+#number-sections: true
+code-tools: true
+lightbox: true
+self-contained: true   
+---
+
+## Parte 1: Transformación Box-Cox
+
+La transformación Box-Cox busca estabilizar la varianza y se define como:
+
+$$
+Y = 
+\begin{cases}
+\dfrac{X^\lambda - 1}{\lambda}, & \lambda \neq 0,\\[8pt]
+\log(X), & \lambda = 0.
+\end{cases}
+$$
+
+```{r, include=FALSE}
+rm(list=ls(all=TRUE))
+
+library(MASS)
+library(fpp3)        # librería para conjuntos de datos de series de tiempo
+library(latex2exp)   # para expresiones LaTeX en títulos
+library(forecast)
+```
+
+```{r}
+# Datos de ejemplo
+data <- c(1,2,3,4,5,6,7,8,9,10)
+
+# Encontrar λ óptimo para la transformación
+optimal_lambda <- BoxCox.lambda(data, lower = -2)
+print(optimal_lambda)
+
+# Gas australiano trimestral (1956Q1–2010Q2)
+GAS <- ts(aus_production$Gas, start = c(1956,1), frequency = 4)
+plot(GAS, type = "l", main = "Producción Trimestral de Gas en Australia")
+
+# λ óptimo para la serie de gas
+optimal_lambda <- BoxCox.lambda(GAS, lower = -2)
+print(optimal_lambda)
+
+# Función de transformación Box-Cox
+box_cox_transform <- function(x, lambda) {
+  if (lambda == 0) {
+    log(x)
+  } else {
+    (x^lambda - 1) / lambda
+  }
+}
+
+# Aplicar transformación
+transformed_data <- box_cox_transform(GAS, optimal_lambda)
+
+par(mfrow = c(1,2))
+plot(GAS, type = "l", main = "Producción Trimestral de Gas en Australia")
+plot(transformed_data, col = "red",
+     main = latex2exp::TeX(paste0(
+       "Producción transformada con $\\lambda = ",
+       round(optimal_lambda,2),"$")))
+```
+
+## Parte 2: Análisis de Tendencia
+
+Se ajusta un modelo lineal de la serie `chicken` versus el tiempo y se examinan los residuos y diferencias.
+
+```{r}
+library(astsa)
+data(chicken)
+
+fit <- lm(chicken ~ time(chicken), na.action = NULL)
+
+par(mfrow = c(2,1))
+plot(resid(fit), type = "o", main = "Residuos (serie desestacionalizada)")
+plot(diff(chicken), type = "o", main = "Primera diferencia")
+
+par(mfrow = c(3,1))
+acf(chicken, 48, main = "ACF de chicken")
+acf(resid(fit), 48, main = "ACF de residuos")
+acf(diff(chicken), 48, main = "ACF de primera diferencia")
+```
+
+## Parte 3: Suavizado en Series de Tiempo
+
+### Media Móvil
+
+```{r suavizado_soi, fig.width=7, fig.height=5}
+# Definir pesos para media móvil centrada
+wgts  <- c(.5, rep(1,11), .5) / 12
+
+# Suavizar el índice SOI con filtro simétrico
+soif  <- stats::filter(soi, sides = 2, filter = wgts)
+
+# Gráfico principal del índice SOI y su suavizado
+plot(soi, main = "Índice SOI y su suavizado con media móvil")
+lines(soif, lwd = 2, col = 4)
+
+# Insertar gráfico de los pesos como inset
+# 1) Guardar parámetros originales
+opar <- par(no.readonly = TRUE)
+
+# 2) Definir la región del inset y márgenes mínimos
+par(fig = c(.65, 1, .65, 1), new = TRUE, mar = c(0, 0, 0, 0))
+
+# 3) Preparar y dibujar el vector de pesos (con relleno)
+nwgts <- c(rep(0, 20), wgts, rep(0, 20))
+plot(nwgts,
+     type = "l",
+     ylim = c(-.02, .1),
+     xaxt = "n",      # sin ejes x
+     yaxt = "n",      # sin ejes y
+     ann = FALSE)     # sin títulos ni etiquetas
+
+# 4) Restaurar parámetros originales
+par(opar)
+```
+
+
+### Suavizado Kernel
+
+```{r}
+plot(soi, main = "Suavizado Kernel del SOI")
+lines(ksmooth(time(soi), soi, "normal", bandwidth = 1), lwd = 2, col = 4)
+
+# Insertar núcleo gaussiano
+#par(fig = c(.65,1,.65,1), new = TRUE)
+gauss <- function(x) 1/sqrt(2*pi) * exp(-(x^2)/2)
+xseq  <- seq(-3,3,by = 0.001)
+plot(xseq, gauss(xseq), type = "l", ylim = c(-.02,.45), xaxt = 'n', yaxt = 'n', ann = FALSE)
+```
+
+### LOWESS
+
+```{r}
+plot(soi, main = "Suavizado LOWESS del SOI")
+lines(lowess(soi, f = .05), lwd = 2, col = 4)    # ciclo El Niño
+lines(lowess(soi, f = 2/3), lty = 2, lwd = 2, col = 2)  # tendencia
+```
+
+### Splines de Suavizado
+
+```{r}
+plot(soi, main = "Suavizado con Splines del SOI")
+lines(smooth.spline(time(soi), soi, spar = .5), lwd = 2, col = 4)  # ciclo
+lines(smooth.spline(time(soi), soi, spar = 1),  lty = 2, lwd = 2, col = 2)  # tendencia
+```
+
+## Parte 4: Matrices de Dispersión
+
+```{r}
+# Matriz de dispersión de soi contra rezagos
+lag1.plot(soi, 12)
+acf(soi, lag.max = 48)
+
+# Matriz de dispersión de rec contra rezagos de soi
+lag2.plot(soi, rec, 8)
+```
+
+## Parte 5: Función de Correlación Cruzada (CCF)
+
+```{r}
+ccf(soi, rec, lag.max = 48, ylab = "Correlación Cruzada")
+```
+
+### Preblanque - Prewhitening and Cross Correlation Analysis - Ejemplo de Shumway y Stoffer (2016)
+
+```{r}
+set.seed(1492)
+num <- 120; t <- 1:num
+X  <- ts(2*cos(2*pi*t/12) + rnorm(num), freq = 12)
+Y  <- ts(2*cos(2*pi*(t+5)/12) + rnorm(num), freq = 12)
+Yw <- resid(lm(Y ~ cos(2*pi*t/12) + sin(2*pi*t/12), na.action = NULL))
+
+par(mfrow = c(3,2), mgp = c(1.6,.6,0), mar = c(3,3,1,1))
+plot(X,  main = "X")
+plot(Y,  main = "Y")
+acf(X, 48, ylab = "ACF(X)")
+acf(Y, 48, ylab = "ACF(Y)")
+ccf(X, Y, 24, ylab = "CCF(X,Y)")
+ccf(X, Yw,24, ylab = "CCF(X,Y preblanqueado)", ylim = c(-.6,.6))
+```
+
+## Parte 6: Gráficos Estacionales
+
+```{r}
+par(mfrow = c(2,1))
+plot(AirPassengers, main = "Pasajeros Mensuales (varianza estabilizada)")
+plot(diff(log(AirPassengers)), main = "Diferencia de log(Pasajeros)")
+
+p1 <- ggseasonplot(diff(log(AirPassengers)), year.labels = TRUE, year.labels.left = TRUE) +
+  ylab("Número de pasajeros") +
+  ggtitle("Gráfico estacional: AirPassengers")
+
+p2 <- ggsubseriesplot(diff(log(AirPassengers))) +
+  ylab("Número de pasajeros") +
+  ggtitle("Subserie estacional: AirPassengers")
+
+library(gridExtra)
+grid.arrange(p1, p2, nrow = 2)
+```

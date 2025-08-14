@@ -2,7 +2,7 @@
 title: "Inicio"
 ---
 
-# Bienvenido
+# Bienvenido {.unnumbered}
 
 Selecciona un curso:
 

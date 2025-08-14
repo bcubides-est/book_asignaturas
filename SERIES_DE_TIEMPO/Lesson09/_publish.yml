@@ -1,8 +1,0 @@
-- source: P8 - Intervencion_Quarto.qmd
-  quarto-pub:
-    - id: 2a38bcc7-1534-4735-b0e4-0a55e20e3720
-      url: https://bcubides.quarto.pub/p8---intervencion_quarto
-- source: P9_Outliers_Quarto.qmd
-  quarto-pub:
-    - id: 848f84aa-85f4-4b62-ba1a-7ba1557d57d9
-      url: https://bcubides.quarto.pub/p9_outliers_quarto

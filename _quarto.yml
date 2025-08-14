@@ -36,7 +36,18 @@ book:
     - part: "SERIES DE TIEMPO"
       link: SERIES_DE_TIEMPO/index.qmd
       chapters:
-        - SERIES_DE_TIEMPO/index.qmd
+        - SERIES_DE_TIEMPO/P0_Repaso_y_Graf_ST_Quarto.qmd
+        - SERIES_DE_TIEMPO/P1_ACF_muestral_Quarto.qmd
+        - SERIES_DE_TIEMPO/P1_others_Quarto.qmd
+        - SERIES_DE_TIEMPO/Tarea_1_ACF_Quarto.qmd
+        - SERIES_DE_TIEMPO/P2_ACF_PACF_para_AR_y_MA_Quarto.qmd
+        - SERIES_DE_TIEMPO/P3_ARMA_estacionariedad_Quarto.qmd
+        - SERIES_DE_TIEMPO/P4_ARMA_Box_Jenkins_Quarto.qmd
+        - SERIES_DE_TIEMPO/P5_MEE_FK_Quarto.qmd
+        - SERIES_DE_TIEMPO/P6_SARIMA_Quarto.qmd
+        - SERIES_DE_TIEMPO/P7_Ajuste_modelos_SARIMA_Quarto.qmd
+        - SERIES_DE_TIEMPO/P8_Intervencion_Quarto.qmd
+        - SERIES_DE_TIEMPO/P9_Outliers_Quarto.qmd
 
 format:
   html:

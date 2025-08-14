@@ -1,0 +1,188 @@
+---
+title: "ARMA - Box-Jenkins - Raiz Unitaria - Diagnóstico - CUSUM y CUSUMQ"
+author: "Brayan Cubides"
+toc: true
+toc-location: right
+toc-depth: 2
+#number-sections: true
+code-tools: true
+lightbox: true
+self-contained: true   
+---
+
+## Limpieza de entorno y carga de librerías
+
+```{r, fig.width=20, fig.height=5, out.width="100%"}
+rm(list = ls(all = TRUE))
+
+library(forecast)
+library(TSA)
+library(readxl)
+library(tseries)
+```
+
+## Definir directorio y leer datos
+
+```{r, fig.width=20, fig.height=5, out.width="100%"}
+# Cambiar "\" por "/" en la ruta
+#setwd("C:/Users/cubid/Desktop/QUARTO - MATERIAS UNAL/9 SERIES DE TIEMPO/Lesson04")
+
+# Leer datos desde Excel
+datos <- read_excel("Programa_2_datos.xls", sheet = "Datos")
+```
+
+## Preparación de la serie y gráfica inicial
+
+```{r, fig.width=20, fig.height=5, out.width="100%"}
+yt <- ts(datos[,2], start = c(1998, 12), frequency = 12)
+plot(yt, type = "l", main = "Serie yt", xlab = "Tiempo")
+```
+
+## Transformación logarítmica para estabilizar varianza
+
+```{r, fig.width=20, fig.height=5, out.width="100%"}
+ln.yt <- log(yt)
+plot(ln.yt, type = "l", main = "Serie en log", xlab = "Tiempo", ylim = c(3.5,5))
+```
+
+## Prueba de raíz unitaria (ADF)
+
+```{r, fig.width=20, fig.height=5, out.width="100%"}
+acf(ln.yt)
+adf.test(ln.yt)  # Ho: no estacionaria, p-valor>0.05 => no rechaza Ho
+```
+
+## Primera diferencia para estacionariedad
+
+```{r, fig.width=20, fig.height=5, out.width="100%"}
+ytd <- diff(ln.yt, 1)
+mean(ytd)
+plot(ytd, type = "l", main = "Serie en primera diferencia", xlab = "Tiempo", ylim = c(-0.08,0.08))
+adf.test(ytd)  # p-valor<0.05 => rechaza Ho
+```
+
+## Identificación: ACF y PACF
+
+```{r, fig.width=20, fig.height=5, out.width="100%"}
+par(mfrow = c(1,2))
+acf(ytd)
+pacf(ytd)
+```
+
+## Selección de modelo ARMA(p,q)
+
+```{r, fig.width=20, fig.height=5, out.width="100%"}
+eacf(ytd)                  # sugerencia ARMA(3,0)
+auto.arima(ytd, trace=TRUE)
+```
+
+## Estimación de dos modelos
+
+```{r, fig.width=20, fig.height=5, out.width="100%"}
+mod1 <- Arima(ytd, order = c(3,0,0), include.mean = FALSE)
+summary(mod1)
+
+mod2 <- Arima(ytd, order = c(2,0,1), include.mean = FALSE)
+summary(mod2)
+```
+
+## Diagnóstico del modelo 1
+
+```{r, fig.width=20, fig.height=5, out.width="100%"}
+at_est <- residuals(mod1)
+
+# Residuales y residuales estandarizados
+plot(at_est, ylim = c(-0.1,0.1), main = "Residuales de mod1"); abline(h=0)
+
+par(mfrow = c(3,1))
+plot(rstandard(mod1), type = "o", ylab = "Residuales estandarizados"); 
+abline(h = c(-2,0,2))
+acf(at_est, lag.max = 36)
+pacf(at_est, lag.max = 36)
+```
+
+## Prueba de Ljung-Box
+
+```{r, fig.width=20, fig.height=5, out.width="100%"}
+# Para varios rezagos
+Ljung_Box <- sapply(1:18, function(i) Box.test(at_est, lag = i, type = "Ljung")$p.value)
+colnames(Ljung_Box) <- NULL
+data.frame(Rezago = 1:18, p.valor = round(Ljung_Box, 4))
+plot(1:18, Ljung_Box, type="b", main="Prueba Ljung-Box (H0: independencia)", ylim=c(0,1))
+abline(h = 0.05, col = "red")
+```
+
+```{r, fig.width=20, fig.height=5, out.width="100%"}
+# tsdiag hace diagnóstico completo
+tsdiag(mod1)
+```
+
+## Normalidad de residuales
+
+```{r, fig.width=20, fig.height=5, out.width="100%"}
+library(nortest)
+ad.test(at_est)      # p-valor>0.05: no rechaza normalidad
+shapiro.test(at_est) # idem
+qqnorm(at_est); qqline(at_est, col = 2)
+hist(at_est, main = "Histograma de residuales mod1")
+```
+
+## Función CUSUM y CUSUMQ
+
+```{r, fig.width=20, fig.height=5, out.width="100%"}
+cucuq <- function(x, nivel) {
+  A <- 0.948
+  N <- length(x)
+  T <- 1:N
+  cu  <- cumsum(x) / sd(x)
+  LS  <- A * sqrt(N-1) + 2*A*(T-1)/sqrt(N-1)
+  LI  <- -LS
+  cu2 <- cumsum(x^2) / sum(x^2)
+  LS2 <- nivel + (T-1)/(N-1)
+  LI2 <- -nivel + (T-1)/(N-1)
+  
+  par(mfrow = c(1,2))
+  matplot(T, cbind(cu, LS, LI), type="l", lty=c(1,2,2),
+          ylab="CUSUM", col=c(1,2,2))
+  matplot(T, cbind(cu2, LS2, LI2), type="l", lty=c(1,2,2),
+          ylab="CUSUMQ", col=c(1,2,2))
+}
+
+cucuq(at_est, nivel = 0.11848)
+```
+
+## Evaluación predictiva dentro y fuera de muestra
+
+```{r, fig.width=20, fig.height=5, out.width="100%"}
+# Dentro de muestra
+summary(mod1)
+summary(mod2)
+
+# Fuera de muestra
+datos.evalua <- read_excel("Programa_2_datos.xls", sheet = "Evaluar")
+yt.eval <- ts(datos.evalua[,2], start = c(2010, 12), frequency = 12)
+
+mod1.evalua <- Arima(yt.eval, model = mod1)
+mod2.evalua <- Arima(yt.eval, model = mod2)
+
+accuracy(mod1.evalua)
+accuracy(mod2.evalua)
+```
+
+## Pronósticos con ggplot2
+
+```{r, fig.width=20, fig.height=5, out.width="100%"}
+library(ggplot2)
+library(forecast)
+# Pronóstico de diferencias
+ytd %>%
+  Arima(order = c(3,0,0), include.mean = FALSE) %>%
+  forecast(h = 20) %>%
+  autoplot()
+
+# Pronóstico en niveles
+ln.yt %>%
+  Arima(order = c(3,1,0), include.mean = FALSE) %>%
+  forecast(h = 20) %>%
+  autoplot()
+```

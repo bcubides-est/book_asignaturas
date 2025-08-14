@@ -1,0 +1,103 @@
+---
+title: "Causalidad y Estacionariedad en AR(1 y 2)"
+author: "Brayan Cubides"
+toc: true
+toc-location: right
+toc-depth: 2
+#number-sections: true
+code-tools: true
+lightbox: true
+self-contained: true   
+---
+
+# Ejemplo 1: AR(2) proceso causal y estacionario
+
+Para un proceso AR(2) con polinomio
+\[
+\phi(z) = 1 - 0.2\,z - 0.48\,z^2,
+\]
+calculamos sus raíces y verificamos la condición de causalidad (todas las raíces fuera del círculo unitario, \(|z_i|>1\)).
+
+```{r, fig.width=20, fig.height=5, out.width="100%"}
+rm(list = ls(all=TRUE))
+
+# Coeficientes del polinomio en orden ascendente de grado
+coef <- c(1, -0.2, -0.48)
+
+# Calcular raíces
+raices <- polyroot(coef)
+print(raices)
+
+# Módulos de las raíces
+modulos_raices <- Mod(raices)
+
+# Verificar causalidad
+if (all(modulos_raices > 1)) {
+  print("El proceso AR(2) es causal.")
+} else {
+  print("El proceso AR(2) no es causal.")
+}
+```
+
+**Interpretación:** si todas las raíces satisfacen \(|z_i|>1\), el proceso es causal y estacionario.
+
+```{r, fig.width=20, fig.height=5, out.width="100%"}
+# Diagrama de Argand (plano complejo)
+par(mfrow = c(1,1))
+plot(0, 0, type="n", xlim=c(-2,2), ylim=c(-2,2),
+     xlab="Parte real", ylab="Parte imaginaria",
+     main="Diagrama de Argand para las raíces")
+points(Re(raices), Im(raices), col="blue", pch=19)
+
+# Círculo unitario
+theta <- seq(0, 2*pi, length.out = 100)
+lines(cos(theta), sin(theta), col="gray")
+```
+
+# Ejemplo 2: AR(2) proceso estacionario pero **no** causal
+
+Punteros del polinomio:
+\[
+\phi(z) = 1 + 1.5\,z - 0.75\,z^2.
+\]
+
+```{r, fig.width=20, fig.height=5, out.width="100%"}
+# Coeficientes
+coef <- c(1, 1.5, -0.75)
+
+# Calcular raíces y módulos
+raices <- polyroot(coef)
+print(raices)
+modulos_raices <- Mod(raices)
+
+# Verificar causalidad
+if (all(modulos_raices > 1)) {
+  print("El proceso AR(2) es causal.")
+} else {
+  print("El proceso AR(2) no es causal.")
+}
+```
+
+# Ejemplo 3: AR(1) proceso causal y estacionario
+
+Para AR(1):
+\[
+\phi(z) = 1 - 0.8\,z.
+\]
+
+```{r, fig.width=20, fig.height=5, out.width="100%"}
+# Coeficientes
+coef <- c(1, -0.8)
+
+# Calcular raíces y módulos
+raices <- polyroot(coef)
+print(raices)
+modulos_raices <- Mod(raices)
+
+# Verificar causalidad
+if (all(modulos_raices > 1)) {
+  print("El proceso AR(1) es causal.")
+} else {
+  print("El proceso AR(1) no es causal.")
+}
+```
