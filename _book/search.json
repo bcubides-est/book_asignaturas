@@ -612,166 +612,166 @@
   {
     "objectID": "SERIES_DE_TIEMPO/P4_ARMA_Box_Jenkins_Quarto.html",
     "href": "SERIES_DE_TIEMPO/P4_ARMA_Box_Jenkins_Quarto.html",
-    "title": "13  ARMA - Box-Jenkins - Raiz Unitaria - Diagnóstico - CUSUM y CUSUMQ",
+    "title": "13  ARMA - Box-Jenkins",
     "section": "",
     "text": "13.1 Limpieza de entorno y carga de librerías\nrm(list = ls(all = TRUE))\n\nlibrary(forecast)\n\nRegistered S3 method overwritten by 'quantmod':\n  method            from\n  as.zoo.data.frame zoo \n\nlibrary(TSA)\n\nRegistered S3 methods overwritten by 'TSA':\n  method       from    \n  fitted.Arima forecast\n  plot.Arima   forecast\n\n\n\nAdjuntando el paquete: 'TSA'\n\n\nThe following objects are masked from 'package:stats':\n\n    acf, arima\n\n\nThe following object is masked from 'package:utils':\n\n    tar\n\nlibrary(readxl)\nlibrary(tseries)",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>ARMA - Box-Jenkins - Raiz Unitaria - Diagnóstico - CUSUM y CUSUMQ</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>ARMA - Box-Jenkins</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P4_ARMA_Box_Jenkins_Quarto.html#definir-directorio-y-leer-datos",
     "href": "SERIES_DE_TIEMPO/P4_ARMA_Box_Jenkins_Quarto.html#definir-directorio-y-leer-datos",
-    "title": "13  ARMA - Box-Jenkins - Raiz Unitaria - Diagnóstico - CUSUM y CUSUMQ",
+    "title": "13  ARMA - Box-Jenkins",
     "section": "13.2 Definir directorio y leer datos",
     "text": "13.2 Definir directorio y leer datos\n\n# Cambiar \"\\\" por \"/\" en la ruta\n#setwd(\"C:/Users/cubid/Desktop/QUARTO - MATERIAS UNAL/9 SERIES DE TIEMPO/Lesson04\")\n\n# Leer datos desde Excel\ndatos &lt;- read_excel(\"Programa_2_datos.xls\", sheet = \"Datos\")",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>ARMA - Box-Jenkins - Raiz Unitaria - Diagnóstico - CUSUM y CUSUMQ</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>ARMA - Box-Jenkins</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P4_ARMA_Box_Jenkins_Quarto.html#preparación-de-la-serie-y-gráfica-inicial",
     "href": "SERIES_DE_TIEMPO/P4_ARMA_Box_Jenkins_Quarto.html#preparación-de-la-serie-y-gráfica-inicial",
-    "title": "13  ARMA - Box-Jenkins - Raiz Unitaria - Diagnóstico - CUSUM y CUSUMQ",
+    "title": "13  ARMA - Box-Jenkins",
     "section": "13.3 Preparación de la serie y gráfica inicial",
     "text": "13.3 Preparación de la serie y gráfica inicial\n\nyt &lt;- ts(datos[,2], start = c(1998, 12), frequency = 12)\nplot(yt, type = \"l\", main = \"Serie yt\", xlab = \"Tiempo\")",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>ARMA - Box-Jenkins - Raiz Unitaria - Diagnóstico - CUSUM y CUSUMQ</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>ARMA - Box-Jenkins</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P4_ARMA_Box_Jenkins_Quarto.html#transformación-logarítmica-para-estabilizar-varianza",
     "href": "SERIES_DE_TIEMPO/P4_ARMA_Box_Jenkins_Quarto.html#transformación-logarítmica-para-estabilizar-varianza",
-    "title": "13  ARMA - Box-Jenkins - Raiz Unitaria - Diagnóstico - CUSUM y CUSUMQ",
+    "title": "13  ARMA - Box-Jenkins",
     "section": "13.4 Transformación logarítmica para estabilizar varianza",
     "text": "13.4 Transformación logarítmica para estabilizar varianza\n\nln.yt &lt;- log(yt)\nplot(ln.yt, type = \"l\", main = \"Serie en log\", xlab = \"Tiempo\", ylim = c(3.5,5))",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>ARMA - Box-Jenkins - Raiz Unitaria - Diagnóstico - CUSUM y CUSUMQ</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>ARMA - Box-Jenkins</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P4_ARMA_Box_Jenkins_Quarto.html#prueba-de-raíz-unitaria-adf",
     "href": "SERIES_DE_TIEMPO/P4_ARMA_Box_Jenkins_Quarto.html#prueba-de-raíz-unitaria-adf",
-    "title": "13  ARMA - Box-Jenkins - Raiz Unitaria - Diagnóstico - CUSUM y CUSUMQ",
+    "title": "13  ARMA - Box-Jenkins",
     "section": "13.5 Prueba de raíz unitaria (ADF)",
     "text": "13.5 Prueba de raíz unitaria (ADF)\n\nacf(ln.yt)\n\n\n\n\n\n\n\nadf.test(ln.yt)  # Ho: no estacionaria, p-valor&gt;0.05 =&gt; no rechaza Ho\n\n\n    Augmented Dickey-Fuller Test\n\ndata:  ln.yt\nDickey-Fuller = -1.4429, Lag order = 5, p-value = 0.8083\nalternative hypothesis: stationary",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>ARMA - Box-Jenkins - Raiz Unitaria - Diagnóstico - CUSUM y CUSUMQ</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>ARMA - Box-Jenkins</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P4_ARMA_Box_Jenkins_Quarto.html#primera-diferencia-para-estacionariedad",
     "href": "SERIES_DE_TIEMPO/P4_ARMA_Box_Jenkins_Quarto.html#primera-diferencia-para-estacionariedad",
-    "title": "13  ARMA - Box-Jenkins - Raiz Unitaria - Diagnóstico - CUSUM y CUSUMQ",
+    "title": "13  ARMA - Box-Jenkins",
     "section": "13.6 Primera diferencia para estacionariedad",
     "text": "13.6 Primera diferencia para estacionariedad\n\nytd &lt;- diff(ln.yt, 1)\nmean(ytd)\n\n[1] -0.000917174\n\nplot(ytd, type = \"l\", main = \"Serie en primera diferencia\", xlab = \"Tiempo\", ylim = c(-0.08,0.08))\n\n\n\n\n\n\n\nadf.test(ytd)  # p-valor&lt;0.05 =&gt; rechaza Ho\n\n\n    Augmented Dickey-Fuller Test\n\ndata:  ytd\nDickey-Fuller = -3.9839, Lag order = 5, p-value = 0.01215\nalternative hypothesis: stationary",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>ARMA - Box-Jenkins - Raiz Unitaria - Diagnóstico - CUSUM y CUSUMQ</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>ARMA - Box-Jenkins</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P4_ARMA_Box_Jenkins_Quarto.html#identificación-acf-y-pacf",
     "href": "SERIES_DE_TIEMPO/P4_ARMA_Box_Jenkins_Quarto.html#identificación-acf-y-pacf",
-    "title": "13  ARMA - Box-Jenkins - Raiz Unitaria - Diagnóstico - CUSUM y CUSUMQ",
+    "title": "13  ARMA - Box-Jenkins",
     "section": "13.7 Identificación: ACF y PACF",
     "text": "13.7 Identificación: ACF y PACF\n\npar(mfrow = c(1,2))\nacf(ytd)\npacf(ytd)",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>ARMA - Box-Jenkins - Raiz Unitaria - Diagnóstico - CUSUM y CUSUMQ</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>ARMA - Box-Jenkins</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P4_ARMA_Box_Jenkins_Quarto.html#selección-de-modelo-armapq",
     "href": "SERIES_DE_TIEMPO/P4_ARMA_Box_Jenkins_Quarto.html#selección-de-modelo-armapq",
-    "title": "13  ARMA - Box-Jenkins - Raiz Unitaria - Diagnóstico - CUSUM y CUSUMQ",
+    "title": "13  ARMA - Box-Jenkins",
     "section": "13.8 Selección de modelo ARMA(p,q)",
     "text": "13.8 Selección de modelo ARMA(p,q)\n\neacf(ytd)                  # sugerencia ARMA(3,0)\n\nAR/MA\n  0 1 2 3 4 5 6 7 8 9 10 11 12 13\n0 x x o o o o o o o o o  o  o  x \n1 x x x o x o o o o o o  o  o  o \n2 x x o x x o o o o o o  o  o  o \n3 o o o o o o o o o o o  o  o  o \n4 o o o o o o o o o o o  o  o  o \n5 o x o o o o o o o o o  o  o  o \n6 x x x o o o o o o o o  o  o  o \n7 x x x x o o o o o o o  o  o  o \n\nauto.arima(ytd, trace=TRUE)\n\n\n ARIMA(2,0,2)(1,0,1)[12] with non-zero mean : -798.6118\n ARIMA(0,0,0)            with non-zero mean : -723.2355\n ARIMA(1,0,0)(1,0,0)[12] with non-zero mean : -772.0796\n ARIMA(0,0,1)(0,0,1)[12] with non-zero mean : -745.8382\n ARIMA(0,0,0)            with zero mean     : -724.8982\n ARIMA(2,0,2)(0,0,1)[12] with non-zero mean : -800.6425\n ARIMA(2,0,2)            with non-zero mean : -802.8645\n ARIMA(2,0,2)(1,0,0)[12] with non-zero mean : -800.6425\n ARIMA(1,0,2)            with non-zero mean : -801.1236\n ARIMA(2,0,1)            with non-zero mean : -798.6628\n ARIMA(3,0,2)            with non-zero mean : -805.3278\n ARIMA(3,0,2)(1,0,0)[12] with non-zero mean : -803.1612\n ARIMA(3,0,2)(0,0,1)[12] with non-zero mean : -803.1816\n ARIMA(3,0,2)(1,0,1)[12] with non-zero mean : -801.9988\n ARIMA(3,0,1)            with non-zero mean : -807.5113\n ARIMA(3,0,1)(1,0,0)[12] with non-zero mean : -805.3912\n ARIMA(3,0,1)(0,0,1)[12] with non-zero mean : -805.4143\n ARIMA(3,0,1)(1,0,1)[12] with non-zero mean : -804.2908\n ARIMA(3,0,0)            with non-zero mean : -809.47\n ARIMA(3,0,0)(1,0,0)[12] with non-zero mean : -807.3684\n ARIMA(3,0,0)(0,0,1)[12] with non-zero mean : -807.3896\n ARIMA(3,0,0)(1,0,1)[12] with non-zero mean : -806.3672\n ARIMA(2,0,0)            with non-zero mean : -786.8746\n ARIMA(4,0,0)            with non-zero mean : -807.5229\n ARIMA(4,0,1)            with non-zero mean : Inf\n ARIMA(3,0,0)            with zero mean     : -811.5348\n ARIMA(3,0,0)(1,0,0)[12] with zero mean     : -809.4548\n ARIMA(3,0,0)(0,0,1)[12] with zero mean     : -809.4724\n ARIMA(3,0,0)(1,0,1)[12] with zero mean     : -808.3412\n ARIMA(2,0,0)            with zero mean     : -788.9918\n ARIMA(4,0,0)            with zero mean     : -809.607\n ARIMA(3,0,1)            with zero mean     : -809.5951\n ARIMA(2,0,1)            with zero mean     : -800.805\n ARIMA(4,0,1)            with zero mean     : Inf\n\n Best model: ARIMA(3,0,0)            with zero mean     \n\n\nSeries: ytd \nARIMA(3,0,0) with zero mean \n\nCoefficients:\n         ar1     ar2      ar3\n      0.5166  0.4765  -0.4043\ns.e.  0.0772  0.0790   0.0774\n\nsigma^2 = 0.0001495:  log likelihood = 409.92\nAIC=-811.84   AICc=-811.53   BIC=-800.16",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>ARMA - Box-Jenkins - Raiz Unitaria - Diagnóstico - CUSUM y CUSUMQ</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>ARMA - Box-Jenkins</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P4_ARMA_Box_Jenkins_Quarto.html#estimación-de-dos-modelos",
     "href": "SERIES_DE_TIEMPO/P4_ARMA_Box_Jenkins_Quarto.html#estimación-de-dos-modelos",
-    "title": "13  ARMA - Box-Jenkins - Raiz Unitaria - Diagnóstico - CUSUM y CUSUMQ",
+    "title": "13  ARMA - Box-Jenkins",
     "section": "13.9 Estimación de dos modelos",
     "text": "13.9 Estimación de dos modelos\n\nmod1 &lt;- Arima(ytd, order = c(3,0,0), include.mean = FALSE)\nsummary(mod1)\n\nSeries: ytd \nARIMA(3,0,0) with zero mean \n\nCoefficients:\n         ar1     ar2      ar3\n      0.5166  0.4765  -0.4043\ns.e.  0.0772  0.0790   0.0774\n\nsigma^2 = 0.0001495:  log likelihood = 409.92\nAIC=-811.84   AICc=-811.53   BIC=-800.16\n\nTraining set error measures:\n                        ME       RMSE         MAE      MPE     MAPE      MASE\nTraining set -0.0003684491 0.01209189 0.009562996 39.69704 126.5415 0.4781506\n                    ACF1\nTraining set -0.01678247\n\nmod2 &lt;- Arima(ytd, order = c(2,0,1), include.mean = FALSE)\nsummary(mod2)\n\nSeries: ytd \nARIMA(2,0,1) with zero mean \n\nCoefficients:\n          ar1     ar2     ma1\n      -0.0941  0.6311  0.5533\ns.e.   0.1002  0.0704  0.1114\n\nsigma^2 = 0.000162:  log likelihood = 404.55\nAIC=-801.11   AICc=-800.81   BIC=-789.43\n\nTraining set error measures:\n                        ME       RMSE        MAE      MPE     MAPE      MASE\nTraining set -0.0002526163 0.01258662 0.01008932 37.02357 119.4948 0.5044668\n                   ACF1\nTraining set 0.08053776",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>ARMA - Box-Jenkins - Raiz Unitaria - Diagnóstico - CUSUM y CUSUMQ</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>ARMA - Box-Jenkins</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P4_ARMA_Box_Jenkins_Quarto.html#diagnóstico-del-modelo-1",
     "href": "SERIES_DE_TIEMPO/P4_ARMA_Box_Jenkins_Quarto.html#diagnóstico-del-modelo-1",
-    "title": "13  ARMA - Box-Jenkins - Raiz Unitaria - Diagnóstico - CUSUM y CUSUMQ",
+    "title": "13  ARMA - Box-Jenkins",
     "section": "13.10 Diagnóstico del modelo 1",
     "text": "13.10 Diagnóstico del modelo 1\n\nat_est &lt;- residuals(mod1)\n\n# Residuales y residuales estandarizados\nplot(at_est, ylim = c(-0.1,0.1), main = \"Residuales de mod1\"); abline(h=0)\n\n\n\n\n\n\n\npar(mfrow = c(3,1))\nplot(rstandard(mod1), type = \"o\", ylab = \"Residuales estandarizados\"); \nabline(h = c(-2,0,2))\nacf(at_est, lag.max = 36)\npacf(at_est, lag.max = 36)",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>ARMA - Box-Jenkins - Raiz Unitaria - Diagnóstico - CUSUM y CUSUMQ</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>ARMA - Box-Jenkins</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P4_ARMA_Box_Jenkins_Quarto.html#prueba-de-ljung-box",
     "href": "SERIES_DE_TIEMPO/P4_ARMA_Box_Jenkins_Quarto.html#prueba-de-ljung-box",
-    "title": "13  ARMA - Box-Jenkins - Raiz Unitaria - Diagnóstico - CUSUM y CUSUMQ",
+    "title": "13  ARMA - Box-Jenkins",
     "section": "13.11 Prueba de Ljung-Box",
     "text": "13.11 Prueba de Ljung-Box\n\n# Para varios rezagos\nLjung_Box &lt;- sapply(1:18, function(i) Box.test(at_est, lag = i, type = \"Ljung\")$p.value)\ncolnames(Ljung_Box) &lt;- NULL\ndata.frame(Rezago = 1:18, p.valor = round(Ljung_Box, 4))\n\n   Rezago p.valor\n1       1  0.8426\n2       2  0.9682\n3       3  0.9696\n4       4  0.9919\n5       5  0.9940\n6       6  0.9964\n7       7  0.9989\n8       8  0.9980\n9       9  0.9968\n10     10  0.9985\n11     11  0.9992\n12     12  0.9996\n13     13  0.9998\n14     14  0.9930\n15     15  0.9956\n16     16  0.9976\n17     17  0.9736\n18     18  0.9789\n\nplot(1:18, Ljung_Box, type=\"b\", main=\"Prueba Ljung-Box (H0: independencia)\", ylim=c(0,1))\nabline(h = 0.05, col = \"red\")\n\n\n\n\n\n\n\n\n\n# tsdiag hace diagnóstico completo\ntsdiag(mod1)",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>ARMA - Box-Jenkins - Raiz Unitaria - Diagnóstico - CUSUM y CUSUMQ</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>ARMA - Box-Jenkins</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P4_ARMA_Box_Jenkins_Quarto.html#normalidad-de-residuales",
     "href": "SERIES_DE_TIEMPO/P4_ARMA_Box_Jenkins_Quarto.html#normalidad-de-residuales",
-    "title": "13  ARMA - Box-Jenkins - Raiz Unitaria - Diagnóstico - CUSUM y CUSUMQ",
+    "title": "13  ARMA - Box-Jenkins",
     "section": "13.12 Normalidad de residuales",
     "text": "13.12 Normalidad de residuales\n\nlibrary(nortest)\nad.test(at_est)      # p-valor&gt;0.05: no rechaza normalidad\n\n\n    Anderson-Darling normality test\n\ndata:  at_est\nA = 0.22546, p-value = 0.8166\n\nshapiro.test(at_est) # idem\n\n\n    Shapiro-Wilk normality test\n\ndata:  at_est\nW = 0.99377, p-value = 0.8164\n\nqqnorm(at_est); qqline(at_est, col = 2)\n\n\n\n\n\n\n\nhist(at_est, main = \"Histograma de residuales mod1\")",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>ARMA - Box-Jenkins - Raiz Unitaria - Diagnóstico - CUSUM y CUSUMQ</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>ARMA - Box-Jenkins</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P4_ARMA_Box_Jenkins_Quarto.html#función-cusum-y-cusumq",
     "href": "SERIES_DE_TIEMPO/P4_ARMA_Box_Jenkins_Quarto.html#función-cusum-y-cusumq",
-    "title": "13  ARMA - Box-Jenkins - Raiz Unitaria - Diagnóstico - CUSUM y CUSUMQ",
+    "title": "13  ARMA - Box-Jenkins",
     "section": "13.13 Función CUSUM y CUSUMQ",
     "text": "13.13 Función CUSUM y CUSUMQ\n\ncucuq &lt;- function(x, nivel) {\n  A &lt;- 0.948\n  N &lt;- length(x)\n  T &lt;- 1:N\n  cu  &lt;- cumsum(x) / sd(x)\n  LS  &lt;- A * sqrt(N-1) + 2*A*(T-1)/sqrt(N-1)\n  LI  &lt;- -LS\n  cu2 &lt;- cumsum(x^2) / sum(x^2)\n  LS2 &lt;- nivel + (T-1)/(N-1)\n  LI2 &lt;- -nivel + (T-1)/(N-1)\n  \n  par(mfrow = c(1,2))\n  matplot(T, cbind(cu, LS, LI), type=\"l\", lty=c(1,2,2),\n          ylab=\"CUSUM\", col=c(1,2,2))\n  matplot(T, cbind(cu2, LS2, LI2), type=\"l\", lty=c(1,2,2),\n          ylab=\"CUSUMQ\", col=c(1,2,2))\n}\n\ncucuq(at_est, nivel = 0.11848)",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>ARMA - Box-Jenkins - Raiz Unitaria - Diagnóstico - CUSUM y CUSUMQ</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>ARMA - Box-Jenkins</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P4_ARMA_Box_Jenkins_Quarto.html#evaluación-predictiva-dentro-y-fuera-de-muestra",
     "href": "SERIES_DE_TIEMPO/P4_ARMA_Box_Jenkins_Quarto.html#evaluación-predictiva-dentro-y-fuera-de-muestra",
-    "title": "13  ARMA - Box-Jenkins - Raiz Unitaria - Diagnóstico - CUSUM y CUSUMQ",
+    "title": "13  ARMA - Box-Jenkins",
     "section": "13.14 Evaluación predictiva dentro y fuera de muestra",
     "text": "13.14 Evaluación predictiva dentro y fuera de muestra\n\n# Dentro de muestra\nsummary(mod1)\n\nSeries: ytd \nARIMA(3,0,0) with zero mean \n\nCoefficients:\n         ar1     ar2      ar3\n      0.5166  0.4765  -0.4043\ns.e.  0.0772  0.0790   0.0774\n\nsigma^2 = 0.0001495:  log likelihood = 409.92\nAIC=-811.84   AICc=-811.53   BIC=-800.16\n\nTraining set error measures:\n                        ME       RMSE         MAE      MPE     MAPE      MASE\nTraining set -0.0003684491 0.01209189 0.009562996 39.69704 126.5415 0.4781506\n                    ACF1\nTraining set -0.01678247\n\nsummary(mod2)\n\nSeries: ytd \nARIMA(2,0,1) with zero mean \n\nCoefficients:\n          ar1     ar2     ma1\n      -0.0941  0.6311  0.5533\ns.e.   0.1002  0.0704  0.1114\n\nsigma^2 = 0.000162:  log likelihood = 404.55\nAIC=-801.11   AICc=-800.81   BIC=-789.43\n\nTraining set error measures:\n                        ME       RMSE        MAE      MPE     MAPE      MASE\nTraining set -0.0002526163 0.01258662 0.01008932 37.02357 119.4948 0.5044668\n                   ACF1\nTraining set 0.08053776\n\n# Fuera de muestra\ndatos.evalua &lt;- read_excel(\"Programa_2_datos.xls\", sheet = \"Evaluar\")\nyt.eval &lt;- ts(datos.evalua[,2], start = c(2010, 12), frequency = 12)\n\nmod1.evalua &lt;- Arima(yt.eval, model = mod1)\nmod2.evalua &lt;- Arima(yt.eval, model = mod2)\n\naccuracy(mod1.evalua)\n\n                   ME     RMSE      MAE      MPE     MAPE MASE        ACF1\nTraining set 39.11233 39.99697 39.11233 42.00275 42.00275  NaN -0.04246928\n\naccuracy(mod2.evalua)\n\n                   ME     RMSE      MAE      MPE     MAPE MASE      ACF1\nTraining set 31.63266 33.46823 31.63266 34.05565 34.05565  NaN 0.1746239",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>ARMA - Box-Jenkins - Raiz Unitaria - Diagnóstico - CUSUM y CUSUMQ</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>ARMA - Box-Jenkins</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P4_ARMA_Box_Jenkins_Quarto.html#pronósticos-con-ggplot2",
     "href": "SERIES_DE_TIEMPO/P4_ARMA_Box_Jenkins_Quarto.html#pronósticos-con-ggplot2",
-    "title": "13  ARMA - Box-Jenkins - Raiz Unitaria - Diagnóstico - CUSUM y CUSUMQ",
+    "title": "13  ARMA - Box-Jenkins",
     "section": "13.15 Pronósticos con ggplot2",
     "text": "13.15 Pronósticos con ggplot2\n\nlibrary(ggplot2)\nlibrary(forecast)\n# Pronóstico de diferencias\nytd %&gt;%\n  Arima(order = c(3,0,0), include.mean = FALSE) %&gt;%\n  forecast(h = 20) %&gt;%\n  autoplot()\n\n\n\n\n\n\n\n# Pronóstico en niveles\nln.yt %&gt;%\n  Arima(order = c(3,1,0), include.mean = FALSE) %&gt;%\n  forecast(h = 20) %&gt;%\n  autoplot()",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>ARMA - Box-Jenkins - Raiz Unitaria - Diagnóstico - CUSUM y CUSUMQ</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>ARMA - Box-Jenkins</span>"
     ]
   },
   {
@@ -876,254 +876,254 @@
   {
     "objectID": "SERIES_DE_TIEMPO/P7_Ajuste_modelos_SARIMA_Quarto.html",
     "href": "SERIES_DE_TIEMPO/P7_Ajuste_modelos_SARIMA_Quarto.html",
-    "title": "16  Ajuste de SARIMA (Completo)",
+    "title": "16  Ajuste SARIMA (Completo)",
     "section": "",
     "text": "17 Ejercicio de ajuste modelo SAIMA\nAjuste de la serie de pasajeros basada en Time Series Analysis - With Applications in R, 2nd Ed.",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Ajuste de SARIMA (Completo)</span>"
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Ajuste SARIMA (Completo)</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P7_Ajuste_modelos_SARIMA_Quarto.html#librerías-necesarias",
     "href": "SERIES_DE_TIEMPO/P7_Ajuste_modelos_SARIMA_Quarto.html#librerías-necesarias",
-    "title": "16  Ajuste de SARIMA (Completo)",
+    "title": "16  Ajuste SARIMA (Completo)",
     "section": "17.1 Librerías necesarias",
     "text": "17.1 Librerías necesarias\n\nlibrary(urca)\nlibrary(forecast)\nlibrary(tseries)\nlibrary(lmtest)\nlibrary(uroot)\nlibrary(fUnitRoots)\nlibrary(aTSA)",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Ajuste de SARIMA (Completo)</span>"
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Ajuste SARIMA (Completo)</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P7_Ajuste_modelos_SARIMA_Quarto.html#parte-1-raíz-unitaria",
     "href": "SERIES_DE_TIEMPO/P7_Ajuste_modelos_SARIMA_Quarto.html#parte-1-raíz-unitaria",
-    "title": "16  Ajuste de SARIMA (Completo)",
+    "title": "16  Ajuste SARIMA (Completo)",
     "section": "17.2 Parte 1: Raíz Unitaria",
-    "text": "17.2 Parte 1: Raíz Unitaria\nSe simula un ARIMA(1,1,1) y se prueban raíces unitarias.\nLa prueba ADF considera: \\[\n\\Delta X_t = \\rho\\,X_{t-1} + \\sum_{j=1}^p\\beta_j\\,\\Delta X_{t-j} + e_t.\n\\]\n\n# Raiz Unitaria\nTlength = 200\narimaej_raiz_unit = arima.sim(list(order = c(1,1,1), ar = 0.7, ma = 0.6),\n                              n = Tlength)\nlayout(matrix(c(1,1,2, 1,1,3), nc = 2))\npar(mar=c(3,3,2,1), mgp=c(1.6,.6,0))\nplot(arimaej_raiz_unit)\nacf(arimaej_raiz_unit)\npacf(arimaej_raiz_unit)\n\n\n\n\n\n\n\n# Ho: Raiz unitaria (no estacionaria) vs Ha: Estacionariedad\ntseries::adf.test(arimaej_raiz_unit)       # p.valor&gt;0.05 ⇒ no rechaza Ho\n\n\n    Augmented Dickey-Fuller Test\n\ndata:  arimaej_raiz_unit\nDickey-Fuller = -2.5836, Lag order = 5, p-value = 0.3317\nalternative hypothesis: stationary\n\n# Prueba KPSS (Ho: estacionariedad vs Ha: raiz unitaria)\ntseries::kpss.test(arimaej_raiz_unit)      # p.valor&lt;0.05 ⇒ rechaza estacionariedad\n\nWarning in tseries::kpss.test(arimaej_raiz_unit): p-value smaller than printed\np-value\n\n\n\n    KPSS Test for Level Stationarity\n\ndata:  arimaej_raiz_unit\nKPSS Level = 2.9054, Truncation lag parameter = 4, p-value = 0.01\n\n# Prueba Phillips-Perron (Ho: raiz unitaria vs Ha: estacionariedad)\ntseries::pp.test(arimaej_raiz_unit)        # p.valor&gt;0.05 ⇒ no rechaza Ho\n\n\n    Phillips-Perron Unit Root Test\n\ndata:  arimaej_raiz_unit\nDickey-Fuller Z(alpha) = -5.418, Truncation lag parameter = 4, p-value\n= 0.8051\nalternative hypothesis: stationary\n\n\nInterpretación:\nLas pruebas ADF y PP no rechazan raíz unitaria, mientras KPSS rechaza estacionariedad ⇒ la serie simulada no es estacionaria.",
+    "text": "17.2 Parte 1: Raíz Unitaria\nSe simula un ARIMA(1,1,1) y se prueban raíces unitarias.\nLa prueba ADF considera: \\[\n\\Delta X_t = \\rho\\,X_{t-1} + \\sum_{j=1}^p\\beta_j\\,\\Delta X_{t-j} + e_t.\n\\]\n\n# Raiz Unitaria\nTlength = 200\narimaej_raiz_unit = arima.sim(list(order = c(1,1,1), ar = 0.7, ma = 0.6),\n                              n = Tlength)\nlayout(matrix(c(1,1,2, 1,1,3), nc = 2))\npar(mar=c(3,3,2,1), mgp=c(1.6,.6,0))\nplot(arimaej_raiz_unit)\nacf(arimaej_raiz_unit)\npacf(arimaej_raiz_unit)\n\n\n\n\n\n\n\n# Ho: Raiz unitaria (no estacionaria) vs Ha: Estacionariedad\ntseries::adf.test(arimaej_raiz_unit)       # p.valor&gt;0.05 ⇒ no rechaza Ho\n\n\n    Augmented Dickey-Fuller Test\n\ndata:  arimaej_raiz_unit\nDickey-Fuller = -1.7888, Lag order = 5, p-value = 0.6646\nalternative hypothesis: stationary\n\n# Prueba KPSS (Ho: estacionariedad vs Ha: raiz unitaria)\ntseries::kpss.test(arimaej_raiz_unit)      # p.valor&lt;0.05 ⇒ rechaza estacionariedad\n\nWarning in tseries::kpss.test(arimaej_raiz_unit): p-value smaller than printed\np-value\n\n\n\n    KPSS Test for Level Stationarity\n\ndata:  arimaej_raiz_unit\nKPSS Level = 1.5802, Truncation lag parameter = 4, p-value = 0.01\n\n# Prueba Phillips-Perron (Ho: raiz unitaria vs Ha: estacionariedad)\ntseries::pp.test(arimaej_raiz_unit)        # p.valor&gt;0.05 ⇒ no rechaza Ho\n\n\n    Phillips-Perron Unit Root Test\n\ndata:  arimaej_raiz_unit\nDickey-Fuller Z(alpha) = -2.9639, Truncation lag parameter = 4, p-value\n= 0.9352\nalternative hypothesis: stationary\n\n\nInterpretación:\nLas pruebas ADF y PP no rechazan raíz unitaria, mientras KPSS rechaza estacionariedad ⇒ la serie simulada no es estacionaria.",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Ajuste de SARIMA (Completo)</span>"
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Ajuste SARIMA (Completo)</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P7_Ajuste_modelos_SARIMA_Quarto.html#parte-2-transformación-y-raíces-unitarias-en-airpassengers",
     "href": "SERIES_DE_TIEMPO/P7_Ajuste_modelos_SARIMA_Quarto.html#parte-2-transformación-y-raíces-unitarias-en-airpassengers",
-    "title": "16  Ajuste de SARIMA (Completo)",
+    "title": "16  Ajuste SARIMA (Completo)",
     "section": "17.3 Parte 2: Transformación y raíces unitarias en AirPassengers",
     "text": "17.3 Parte 2: Transformación y raíces unitarias en AirPassengers\n\n17.3.1 2.1 Estabilizar varianza\nBox–Cox indica \\(\\lambda\\approx0\\) ⇒ aplicar \\(\\log\\):\n\ndata(\"AirPassengers\")\npar(mfrow=c(1,1))\nplot(AirPassengers)\n\n\n\n\n\n\n\nforecast::BoxCox.lambda(AirPassengers, method=\"guerrero\", lower=0)\n\n[1] 4.102259e-05\n\nforecast::BoxCox.lambda(AirPassengers, method=\"loglik\",   lower=0)\n\n[1] 0.2\n\nlogAirP = log(AirPassengers)\n\npar(mfrow=c(2,1))\nplot(AirPassengers, main=\"Original\")\nplot(logAirP,      main=\"Logaritmo natural\")\n\n\n\n\n\n\n\n\n\n\n17.3.2 2.2 Detectar raíces unitarias regulares y estacionales\n\npar(mfrow=c(2,1))\nacf(logAirP, lag.max = 60)\npacf(logAirP)\n\n\n\n\n\n\n\n# ADF con drift y tendencia\ntseries::adf.test(logAirP)     # p.valor&gt;=0.01 ⇒ no rechaza Ho\n\nWarning in tseries::adf.test(logAirP): p-value smaller than printed p-value\n\n\n\n    Augmented Dickey-Fuller Test\n\ndata:  logAirP\nDickey-Fuller = -6.4215, Lag order = 5, p-value = 0.01\nalternative hypothesis: stationary\n\n# KPSS (Ho: estacionariedad)\ntseries::kpss.test(logAirP)    # p.valor&lt;0.05 ⇒ rechaza estacionariedad\n\nWarning in tseries::kpss.test(logAirP): p-value smaller than printed p-value\n\n\n\n    KPSS Test for Level Stationarity\n\ndata:  logAirP\nKPSS Level = 2.8287, Truncation lag parameter = 4, p-value = 0.01\n\n# PP (Ho: raiz unitaria)\ntseries::pp.test(logAirP)      # p.valor&gt;=0.01 ⇒ no rechaza Ho\n\nWarning in tseries::pp.test(logAirP): p-value smaller than printed p-value\n\n\n\n    Phillips-Perron Unit Root Test\n\ndata:  logAirP\nDickey-Fuller Z(alpha) = -47.933, Truncation lag parameter = 4, p-value\n= 0.01\nalternative hypothesis: stationary\n\n# ADF aumentado\naTSA::adf.test(logAirP, nlag = 8)\n\nAugmented Dickey-Fuller Test \nalternative: stationary \n \nType 1: no drift no trend \n     lag   ADF p.value\n[1,]   0 0.913   0.902\n[2,]   1 0.674   0.836\n[3,]   2 0.796   0.871\n[4,]   3 0.936   0.905\n[5,]   4 1.510   0.966\n[6,]   5 1.382   0.957\n[7,]   6 1.451   0.962\n[8,]   7 1.847   0.983\nType 2: with drift no trend \n     lag    ADF p.value\n[1,]   0 -1.816   0.400\n[2,]   1 -2.018   0.321\n[3,]   2 -1.650   0.465\n[4,]   3 -1.609   0.481\n[5,]   4 -1.288   0.595\n[6,]   5 -1.108   0.659\n[7,]   6 -0.923   0.723\n[8,]   7 -0.807   0.764\nType 3: with drift and trend \n     lag   ADF p.value\n[1,]   0 -4.85    0.01\n[2,]   1 -7.00    0.01\n[3,]   2 -6.71    0.01\n[4,]   3 -7.13    0.01\n[5,]   4 -5.66    0.01\n[6,]   5 -6.42    0.01\n[7,]   6 -6.88    0.01\n[8,]   7 -6.28    0.01\n---- \nNote: in fact, p.value = 0.01 means p.value &lt;= 0.01 \n\n\n\n# Decisión de diferencias\nndiffs(logAirP)   # d = 1\n\n[1] 1\n\nnsdiffs(logAirP)  # D = 1\n\n[1] 1\n\n\nInterpretación:\nSe requieren una diferencia regular (\\(d=1\\)) y una estacional (\\(D=1\\)) para estacionarizar.",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Ajuste de SARIMA (Completo)</span>"
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Ajuste SARIMA (Completo)</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P7_Ajuste_modelos_SARIMA_Quarto.html#parte-3-diferencias-y-verificación",
     "href": "SERIES_DE_TIEMPO/P7_Ajuste_modelos_SARIMA_Quarto.html#parte-3-diferencias-y-verificación",
-    "title": "16  Ajuste de SARIMA (Completo)",
+    "title": "16  Ajuste SARIMA (Completo)",
     "section": "17.4 Parte 3: Diferencias y verificación",
     "text": "17.4 Parte 3: Diferencias y verificación\n\n# Diferencia regular\ndlogAirPass = diff(logAirP)\n\npar(mfrow=c(3,1))\nplot(AirPassengers); plot(logAirP); plot(dlogAirPass)\n\n\n\n\n\n\n\npar(mfrow=c(2,1))\nacf(dlogAirPass, lag.max = 48)\npacf(dlogAirPass)\n\n\n\n\n\n\n\naTSA::adf.test(dlogAirPass, nlag = 15)\n\nAugmented Dickey-Fuller Test \nalternative: stationary \n \nType 1: no drift no trend \n      lag     ADF p.value\n [1,]   0  -9.606  0.0100\n [2,]   1  -8.816  0.0100\n [3,]   2  -7.634  0.0100\n [4,]   3  -8.745  0.0100\n [5,]   4  -6.791  0.0100\n [6,]   5  -6.245  0.0100\n [7,]   6  -6.571  0.0100\n [8,]   7  -9.498  0.0100\n [9,]   8  -8.028  0.0100\n[10,]   9 -10.214  0.0100\n[11,]  10  -7.327  0.0100\n[12,]  11  -1.868  0.0622\n[13,]  12  -1.223  0.2402\n[14,]  13  -1.283  0.2186\n[15,]  14  -0.992  0.3231\nType 2: with drift no trend \n      lag    ADF p.value\n [1,]   0  -9.63  0.0100\n [2,]   1  -8.86  0.0100\n [3,]   2  -7.71  0.0100\n [4,]   3  -8.94  0.0100\n [5,]   4  -6.98  0.0100\n [6,]   5  -6.46  0.0100\n [7,]   6  -6.91  0.0100\n [8,]   7 -10.55  0.0100\n [9,]   8  -9.57  0.0100\n[10,]   9 -15.32  0.0100\n[11,]  10 -16.05  0.0100\n[12,]  11  -4.60  0.0100\n[13,]  12  -3.05  0.0352\n[14,]  13  -3.22  0.0222\n[15,]  14  -2.72  0.0789\nType 3: with drift and trend \n      lag    ADF p.value\n [1,]   0  -9.60  0.0100\n [2,]   1  -8.83  0.0100\n [3,]   2  -7.69  0.0100\n [4,]   3  -8.92  0.0100\n [5,]   4  -6.95  0.0100\n [6,]   5  -6.43  0.0100\n [7,]   6  -6.88  0.0100\n [8,]   7 -10.51  0.0100\n [9,]   8  -9.55  0.0100\n[10,]   9 -15.44  0.0100\n[11,]  10 -16.57  0.0100\n[12,]  11  -4.94  0.0100\n[13,]  12  -3.37  0.0628\n[14,]  13  -3.56  0.0392\n[15,]  14  -3.12  0.1090\n---- \nNote: in fact, p.value = 0.01 means p.value &lt;= 0.01 \n\n# Diferencia estacional\nd_dlogAirPass = diff(dlogAirPass, 12)\n\npar(mfrow=c(4,1))\nplot(AirPassengers); plot(logAirP); plot(dlogAirPass); plot(d_dlogAirPass)\n\n\n\n\n\n\n\npar(mfrow=c(2,1))\nacf(d_dlogAirPass, lag.max = 50)\npacf(d_dlogAirPass, lag.max = 50)\n\n\n\n\n\n\n\naTSA::adf.test(d_dlogAirPass, nlag = 15)\n\nAugmented Dickey-Fuller Test \nalternative: stationary \n \nType 1: no drift no trend \n      lag    ADF p.value\n [1,]   0 -16.25    0.01\n [2,]   1  -9.34    0.01\n [3,]   2  -8.65    0.01\n [4,]   3  -7.70    0.01\n [5,]   4  -6.11    0.01\n [6,]   5  -5.23    0.01\n [7,]   6  -5.03    0.01\n [8,]   7  -4.72    0.01\n [9,]   8  -3.38    0.01\n[10,]   9  -2.96    0.01\n[11,]  10  -2.86    0.01\n[12,]  11  -4.39    0.01\n[13,]  12  -4.47    0.01\n[14,]  13  -4.53    0.01\n[15,]  14  -4.03    0.01\nType 2: with drift no trend \n      lag    ADF p.value\n [1,]   0 -16.19  0.0100\n [2,]   1  -9.30  0.0100\n [3,]   2  -8.61  0.0100\n [4,]   3  -7.67  0.0100\n [5,]   4  -6.08  0.0100\n [6,]   5  -5.20  0.0100\n [7,]   6  -5.00  0.0100\n [8,]   7  -4.69  0.0100\n [9,]   8  -3.36  0.0162\n[10,]   9  -2.95  0.0452\n[11,]  10  -2.84  0.0587\n[12,]  11  -4.36  0.0100\n[13,]  12  -4.44  0.0100\n[14,]  13  -4.51  0.0100\n[15,]  14  -4.01  0.0100\nType 3: with drift and trend \n      lag    ADF p.value\n [1,]   0 -16.16  0.0100\n [2,]   1  -9.29  0.0100\n [3,]   2  -8.62  0.0100\n [4,]   3  -7.70  0.0100\n [5,]   4  -6.09  0.0100\n [6,]   5  -5.20  0.0100\n [7,]   6  -5.00  0.0100\n [8,]   7  -4.68  0.0100\n [9,]   8  -3.34  0.0674\n[10,]   9  -2.95  0.1816\n[11,]  10  -2.82  0.2333\n[12,]  11  -4.32  0.0100\n[13,]  12  -4.41  0.0100\n[14,]  13  -4.48  0.0100\n[15,]  14  -3.99  0.0122\n---- \nNote: in fact, p.value = 0.01 means p.value &lt;= 0.01 \n\n\nInterpretación:\nTras \\(d=1, D=1\\), la serie estacionariza: ACF y PACF ya no muestran picos periódicos ni tendencia.",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Ajuste de SARIMA (Completo)</span>"
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Ajuste SARIMA (Completo)</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P7_Ajuste_modelos_SARIMA_Quarto.html#parte-4-ajuste-de-posibles-modelos-sarima",
     "href": "SERIES_DE_TIEMPO/P7_Ajuste_modelos_SARIMA_Quarto.html#parte-4-ajuste-de-posibles-modelos-sarima",
-    "title": "16  Ajuste de SARIMA (Completo)",
+    "title": "16  Ajuste SARIMA (Completo)",
     "section": "17.5 Parte 4: Ajuste de posibles modelos SARIMA",
     "text": "17.5 Parte 4: Ajuste de posibles modelos SARIMA\nSe prueban tres modelos con transformación \\(\\lambda=0\\):\n\n# 1) ARIMA(1,1,1)x(0,1,1)[12]\nMod1 = forecast::Arima(\n  AirPassengers,\n  order    = c(1,1,1),\n  seasonal = c(0,1,1),\n  lambda   = 0,\n  method   = \"ML\"\n)\n\n# 2) ARIMA(0,1,1)x(0,1,1)[12]\nMod2 = forecast::Arima(\n  AirPassengers,\n  order    = c(0,1,1),\n  seasonal = c(0,1,1),\n  lambda   = 0,\n  method   = \"ML\"\n)\n\n# 3) ARIMA(1,1,0)x(0,1,1)[12]\nMod3 = forecast::Arima(\n  AirPassengers,\n  order    = c(1,1,0),\n  seasonal = c(0,1,1),\n  lambda   = 0,\n  method   = \"ML\"\n)\n\nMod2; Mod3\n\nSeries: AirPassengers \nARIMA(0,1,1)(0,1,1)[12] \nBox Cox transformation: lambda= 0 \n\nCoefficients:\n          ma1     sma1\n      -0.4018  -0.5569\ns.e.   0.0896   0.0731\n\nsigma^2 = 0.001371:  log likelihood = 244.7\nAIC=-483.4   AICc=-483.21   BIC=-474.77\n\n\nSeries: AirPassengers \nARIMA(1,1,0)(0,1,1)[12] \nBox Cox transformation: lambda= 0 \n\nCoefficients:\n          ar1     sma1\n      -0.3395  -0.5619\ns.e.   0.0822   0.0748\n\nsigma^2 = 0.001391:  log likelihood = 243.74\nAIC=-481.49   AICc=-481.3   BIC=-472.86\n\n\nInterpretación:\nLos criterios AIC/BIC prefieren Mod2: ARIMA(0,1,1)x(0,1,1)[12].",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Ajuste de SARIMA (Completo)</span>"
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Ajuste SARIMA (Completo)</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P7_Ajuste_modelos_SARIMA_Quarto.html#parte-5-diagnóstico-de-mod2",
     "href": "SERIES_DE_TIEMPO/P7_Ajuste_modelos_SARIMA_Quarto.html#parte-5-diagnóstico-de-mod2",
-    "title": "16  Ajuste de SARIMA (Completo)",
+    "title": "16  Ajuste SARIMA (Completo)",
     "section": "17.6 Parte 5: Diagnóstico de Mod2",
     "text": "17.6 Parte 5: Diagnóstico de Mod2\n\nat_est &lt;- residuals(Mod2)\ntsdiag(Mod2)\n\n\n\n\n\n\n\n# Normalidad de residuos\nlibrary(car); library(nortest)\n\nCargando paquete requerido: carData\n\nad.test(at_est); shapiro.test(at_est)\n\n\n    Anderson-Darling normality test\n\ndata:  at_est\nA = 0.68703, p-value = 0.07132\n\n\n\n    Shapiro-Wilk normality test\n\ndata:  at_est\nW = 0.98637, p-value = 0.1674\n\nhist(at_est, freq=FALSE)\nlines(density(at_est), col=\"red\", lwd=2)\n\n\n\n\n\n\n\nqqnorm(at_est); qqline(at_est, col=2)\n\n\n\n\n\n\n\n\nInterpretación:\nResiduos no muestran autocorrelación ni alejados de normalidad ⇒ modelo adecuado.",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Ajuste de SARIMA (Completo)</span>"
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Ajuste SARIMA (Completo)</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P7_Ajuste_modelos_SARIMA_Quarto.html#parte-6-cusum-y-cusumq",
     "href": "SERIES_DE_TIEMPO/P7_Ajuste_modelos_SARIMA_Quarto.html#parte-6-cusum-y-cusumq",
-    "title": "16  Ajuste de SARIMA (Completo)",
+    "title": "16  Ajuste SARIMA (Completo)",
     "section": "17.7 Parte 6: CUSUM y CUSUMQ",
     "text": "17.7 Parte 6: CUSUM y CUSUMQ\n\ncum  = cumsum(at_est)/sd(at_est)\nN    = length(at_est)\ncumq = cumsum(at_est^2)/sum(at_est^2)\nAf   = 0.948  # 95% CUSUM\nco   = 0.14013\n\nLS   = Af*sqrt(N) + 2*Af*(1:N)/sqrt(N)\nLI   = -LS\nLQS  = co + (1:N)/N\nLQI  = -co + (1:N)/N\n\npar(mfrow=c(2,1))\nplot(cum,  type=\"l\", ylim=c(min(LI),max(LS)), main=\"CUSUM\");  lines(LS, col=\"red\"); lines(LI, col=\"red\")\nplot(cumq, type=\"l\", main=\"CUSUMSQ\"); lines(LQS, col=\"red\"); lines(LQI, col=\"red\")\n\n\n\n\n\n\n\n\nConclusiones:\n- CUSUM: sin cambio estructural.\n- CUSUMQ: posible heterocedasticidad moderada ⇒ probar ARCH.",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Ajuste de SARIMA (Completo)</span>"
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Ajuste SARIMA (Completo)</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P7_Ajuste_modelos_SARIMA_Quarto.html#parte-7-pronóstico",
     "href": "SERIES_DE_TIEMPO/P7_Ajuste_modelos_SARIMA_Quarto.html#parte-7-pronóstico",
-    "title": "16  Ajuste de SARIMA (Completo)",
+    "title": "16  Ajuste SARIMA (Completo)",
     "section": "17.8 Parte 7: Pronóstico",
     "text": "17.8 Parte 7: Pronóstico\n\npar(mfrow=c(1,1))\npronosticos12 = forecast::forecast(Mod2, h=12, level=0.95)\nplot(pronosticos12)\n\n\n\n\n\n\n\n# Con ggplot2\nAirPassengers %&gt;%\n  forecast::Arima(order=c(0,1,1), seasonal=c(0,1,1), lambda=0, method=\"ML\") %&gt;%\n  forecast::forecast(h=12) %&gt;%\n  autoplot()\n\n\n\n\n\n\n\n\nUso práctico:\nLas proyecciones con bandas de confianza guían decisiones de capacidad y planificación en transporte aéreo.\n\n17.8.1 Notas de modelado SARIMA\n\nIdentificar \\(d,D\\) con ndiffs, nsdiffs.\n\nACF estacional: picos en múltiplos de 12 ⇒ componente SMA o SAR.\n\nPACF estacional: corte en orden \\(P\\).\n\nValidar residuos (Ljung–Box, normalidad).\n\nAjuste iterativo: simplificar términos insignificantes.\n\nEste flujo implementa el método Box–Jenkins para datos estacionales.",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Ajuste de SARIMA (Completo)</span>"
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Ajuste SARIMA (Completo)</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P8_Intervencion_Quarto.html",
     "href": "SERIES_DE_TIEMPO/P8_Intervencion_Quarto.html",
-    "title": "17  Modelo con INTERVENCIÓN (oUTLIERS) - Ajuste ARIMAX",
+    "title": "17  Intervención",
     "section": "",
     "text": "17.1 Descripción del ejercicio",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Modelo con INTERVENCIÓN (oUTLIERS) - Ajuste ARIMAX</span>"
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Intervención</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P8_Intervencion_Quarto.html#descripción-del-ejercicio",
     "href": "SERIES_DE_TIEMPO/P8_Intervencion_Quarto.html#descripción-del-ejercicio",
-    "title": "17  Modelo con INTERVENCIÓN (oUTLIERS) - Ajuste ARIMAX",
+    "title": "17  Intervención",
     "section": "",
     "text": "Instalación y carga de los paquetes necesarios.\n\nSimulación de una serie ARIMA(1,1,1).\n\nIntervención puntual en \\(t=50\\).\n\nAjuste de un ARIMA con variable de intervención (ARIMAX).\n\nPronóstico incorporando la intervención.\n\nVisualización de resultados.",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Modelo con INTERVENCIÓN (oUTLIERS) - Ajuste ARIMAX</span>"
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Intervención</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P8_Intervencion_Quarto.html#instalación-y-carga",
     "href": "SERIES_DE_TIEMPO/P8_Intervencion_Quarto.html#instalación-y-carga",
-    "title": "17  Modelo con INTERVENCIÓN (oUTLIERS) - Ajuste ARIMAX",
+    "title": "17  Intervención",
     "section": "17.2 1. Instalación y carga",
     "text": "17.2 1. Instalación y carga",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Modelo con INTERVENCIÓN (oUTLIERS) - Ajuste ARIMAX</span>"
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Intervención</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P8_Intervencion_Quarto.html#simulación-de-la-serie-arima111",
     "href": "SERIES_DE_TIEMPO/P8_Intervencion_Quarto.html#simulación-de-la-serie-arima111",
-    "title": "17  Modelo con INTERVENCIÓN (oUTLIERS) - Ajuste ARIMAX",
+    "title": "17  Intervención",
     "section": "17.3 2. Simulación de la serie ARIMA(1,1,1)",
     "text": "17.3 2. Simulación de la serie ARIMA(1,1,1)\nSimulamos\n\\[\n(1 - 0.5B)(1-B)Y_t = (1 + 0.5B)\\,w_t\n\\] con \\(n=100\\).\n\nset.seed(123)\nsim_data &lt;- arima.sim(n = 100, list(order = c(1, 1, 1), ar = 0.5, ma = 0.5))\n# Ajustar a 100 observaciones\nsim_data &lt;- sim_data[-1]\nlayout(matrix(c(1,1,2, 1,1,3), nc=2))\npar(mar = c(3,3,2,1), mgp = c(1.6, .6, 0))\n\nplot(sim_data, type=\"l\", ylim = c(-15,40), main = \"Simulación ARIMA(1,1,1)\")\nacf(sim_data, main = \"ACF de la serie simulada\")\npacf(sim_data, main = \"PACF de la serie simulada\")\n\n\n\n\n\n\n\n\nInterpretación: ACF/PACF muestran decaimiento exponencial típico de ARMA con integración.",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Modelo con INTERVENCIÓN (oUTLIERS) - Ajuste ARIMAX</span>"
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Intervención</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P8_Intervencion_Quarto.html#introducción-de-la-intervención",
     "href": "SERIES_DE_TIEMPO/P8_Intervencion_Quarto.html#introducción-de-la-intervención",
-    "title": "17  Modelo con INTERVENCIÓN (oUTLIERS) - Ajuste ARIMAX",
+    "title": "17  Intervención",
     "section": "17.4 3. Introducción de la intervención",
     "text": "17.4 3. Introducción de la intervención\nCreamos un dummy de paso en \\(t=50\\) y añadimos un salto de +10:\n\nintervention &lt;- rep(0, 100)\nintervention[50:100] &lt;- 1 #A partir del dato 50 lo vuelve 1\nsim_data[50:100] &lt;- sim_data[50:100] + 10 #sumar 10 a partir del datos 50 (es el tamaño del impacto)\n\nplot(sim_data, type=\"l\", ylim = c(-15,40), main = \"Serie con intervención en t=50\")\n\n\n\n\n\n\n\nacf(sim_data, main = \"ACF tras intervención\")\n\n\n\n\n\n\n\npacf(sim_data, main = \"PACF tras intervención\")",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Modelo con INTERVENCIÓN (oUTLIERS) - Ajuste ARIMAX</span>"
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Intervención</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P8_Intervencion_Quarto.html#ajuste-del-modelo-arimax",
     "href": "SERIES_DE_TIEMPO/P8_Intervencion_Quarto.html#ajuste-del-modelo-arimax",
-    "title": "17  Modelo con INTERVENCIÓN (oUTLIERS) - Ajuste ARIMAX",
+    "title": "17  Intervención",
     "section": "17.5 4. Ajuste del modelo ARIMAX",
     "text": "17.5 4. Ajuste del modelo ARIMAX\nAjustamos\n\\[\nY_t = \\text{ARIMA}(1,1,1) + \\beta\\,I_t + e_t\n\\] donde \\(I_t\\) es el dummy de intervención.\n\n# Ajuste automático con regresor\nmodel &lt;- auto.arima(sim_data, xreg = intervention)\n#Es importante ponerle el xreg, que es el outlier de escalon, o sino, cambia la dinámica de la serie\n\n# Resultados del ajuste\nsummary(model)\n\nSeries: sim_data \nRegression with ARIMA(3,0,1) errors \n\nCoefficients:\n         ar1     ar2      ar3    ma1    xreg\n      1.1219  0.1570  -0.3115  0.896  9.7342\ns.e.  0.1379  0.2399   0.1307  0.097  0.5947\n\nsigma^2 = 0.776:  log likelihood = -129.76\nAIC=271.53   AICc=272.43   BIC=287.16\n\nTraining set error measures:\n                    ME      RMSE       MAE       MPE     MAPE     MASE\nTraining set 0.1028133 0.8585771 0.6735318 -7.249322 30.30527 0.558724\n                    ACF1\nTraining set -0.01280115\n\n\nInterpretación: El coeficiente de intervention estima el efecto puntual (nivel) tras \\(t=50\\).",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Modelo con INTERVENCIÓN (oUTLIERS) - Ajuste ARIMAX</span>"
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Intervención</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P8_Intervencion_Quarto.html#pronóstico-con-intervención",
     "href": "SERIES_DE_TIEMPO/P8_Intervencion_Quarto.html#pronóstico-con-intervención",
-    "title": "17  Modelo con INTERVENCIÓN (oUTLIERS) - Ajuste ARIMAX",
+    "title": "17  Intervención",
     "section": "17.6 5. Pronóstico con intervención",
     "text": "17.6 5. Pronóstico con intervención\nPronosticamos 12 pasos, asumiendo el dummy activo (\\(I_t=1\\)):\n\nforecast_values &lt;- forecast(model, xreg = rep(1, 12)) \n#La variable hexogena (outlier) añade 1's en esos 12 adelantos que no tenía registro",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Modelo con INTERVENCIÓN (oUTLIERS) - Ajuste ARIMAX</span>"
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Intervención</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P8_Intervencion_Quarto.html#visualización-de-resultados",
     "href": "SERIES_DE_TIEMPO/P8_Intervencion_Quarto.html#visualización-de-resultados",
-    "title": "17  Modelo con INTERVENCIÓN (oUTLIERS) - Ajuste ARIMAX",
+    "title": "17  Intervención",
     "section": "17.7 6. Visualización de resultados",
     "text": "17.7 6. Visualización de resultados\n\npar(mfrow = c(1,1))\nplot(forecast_values, main = \"Pronóstico con intervención\")\nlines(sim_data, col = \"blue\")\nabline(v = 50, col = \"red\", lty = 2)\nlegend(\n  \"bottomright\",\n  legend = c(\"Datos simulados\", \"Intervención (t=50)\", \"Pronóstico\"),\n  col    = c(\"blue\", \"red\", \"black\"),\n  lty    = c(1, 2, 1)\n)",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Modelo con INTERVENCIÓN (oUTLIERS) - Ajuste ARIMAX</span>"
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Intervención</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P8_Intervencion_Quarto.html#usos-y-notas-prácticas",
     "href": "SERIES_DE_TIEMPO/P8_Intervencion_Quarto.html#usos-y-notas-prácticas",
-    "title": "17  Modelo con INTERVENCIÓN (oUTLIERS) - Ajuste ARIMAX",
+    "title": "17  Intervención",
     "section": "17.8 Usos y notas prácticas",
     "text": "17.8 Usos y notas prácticas\n\nModelos ARIMAX permiten cuantificar el impacto de un choque o política puntual.\n\nLa variable de intervención \\(I_t\\) puede representar subsidios, promociones, cambios regulatorios, etc.\n\nEvaluar la significancia del coeficiente \\(\\beta\\) indica si la intervención produjo un cambio duradero en nivel.\n\nEste enfoque es básico para estudios de evaluación de impacto en series temporales.",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Modelo con INTERVENCIÓN (oUTLIERS) - Ajuste ARIMAX</span>"
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Intervención</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P9_Outliers_Quarto.html",
     "href": "SERIES_DE_TIEMPO/P9_Outliers_Quarto.html",
-    "title": "18  Outliers e INTERVENCIÓN - Pronóstico",
+    "title": "18  Outliers e Intervención",
     "section": "",
     "text": "18.1 Outliers en Modelos ARIMA\nVamos a considerar el análisis de outliers para modelos ARIMA o SARIMA.\nLa base fundamental del análisis de outliers se basa en en análisis de intervención. Vamos a empezar con unos ejercicios de simulación. La librería base es tsoutliers.\nlibrary(tsoutliers)\nlibrary(forecast)\n###### Simulación Outlier aditivo\n\nset.seed(12)\nn=200\nserie=arima.sim(n=n,list(ar=(0.5))) #Se genera un AR(1)\nserie2=serie\nserie2[50]=serie2[50]-6 #En el dato 50, se le quitan 6 unidades para volverlo un outlier\n\npar(mfrow=c(1,2))\nplot(serie,ylim=c(-3,6),main=\"Serie original\")\nplot(serie2,ylim=c(-3,6),main=\"Outlier aditivo\")\nDespués de simular un outlier aditivo en el tiempo \\(t=50\\) con impacto de 6, basada en una serie que proviene de de un modelo AR con \\(\\phi=0.5\\).\nEn seguida vamos ajustar los modelos a las series con y sin outlier vía el procedimiento automático.\nauto.arima(serie2)###Ajuste para el modelo con outlier\n\nSeries: serie2 \nARIMA(1,0,0) with zero mean \n\nCoefficients:\n         ar1\n      0.4119\ns.e.  0.0642\n\nsigma^2 = 1.117:  log likelihood = -294.44\nAIC=592.88   AICc=592.94   BIC=599.48\n\n#Se observa que cambió la estimación por no tener en cuenta el dato atípico para modelar\nauto.arima(serie)###Ajuste para el modelo sin outlier \n\nSeries: serie \nARIMA(1,0,0) with zero mean \n\nCoefficients:\n         ar1\n      0.4693\ns.e.  0.0622\n\nsigma^2 = 0.9065:  log likelihood = -273.6\nAIC=551.2   AICc=551.26   BIC=557.79\n\nfit= arima(serie2,order=c(1,0,0),include.mean = F)\nfit\n\n\nCall:\narima(x = serie2, order = c(1, 0, 0), include.mean = F)\n\nCoefficients:\n         ar1\n      0.4119\ns.e.  0.0642\n\nsigma^2 estimated as 1.111:  log likelihood = -294.44,  aic = 592.88\n\nresi= residuals(fit)\nplot(resi)\n\n\n\n\n\n\n\n#Se observa en la gráfica de los residuales el efecto de no tener en cuenta los datos típicos\nNote que el residual correspodiente a la observación 50 es bastante grande.",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Outliers e INTERVENCIÓN - Pronóstico</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Outliers e Intervención</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P9_Outliers_Quarto.html#detección-de-outliers-procedimiento-automático",
     "href": "SERIES_DE_TIEMPO/P9_Outliers_Quarto.html#detección-de-outliers-procedimiento-automático",
-    "title": "18  Outliers e INTERVENCIÓN - Pronóstico",
+    "title": "18  Outliers e Intervención",
     "section": "18.2 Detección de outliers: procedimiento automático",
     "text": "18.2 Detección de outliers: procedimiento automático\n\ncoef= coefs2poly(fit)\ncoef\n\n$arcoefs\n[1] 0.4119239\n\n$macoefs\nnumeric(0)\n\nattr(,\"class\")\n[1] \"ArimaPars\"\n\noutliers= tsoutliers::locate.outliers(resi,coef) #Inidca el tipo de dato atípico, la posición y su efecto.\noutliers###tstat se compara con C=3\n\n  type ind   coefhat    tstat\n1   AO  50 -5.924796 -6.44878\n\n# ?tso####Detección automática de outliers, donde el modelo que se propone es via auto.arima\ntso(serie2) #Otra forma de ver el efecto de los outliers. Pero no lo tiene en cuenta para calcular el coeficiente\n\nSeries: serie2 \nRegression with ARIMA(1,0,0) errors \n\nCoefficients:\n         ar1     AO50\n      0.4693  -5.9156\ns.e.  0.0622   0.8598\n\nsigma^2 = 0.9111:  log likelihood = -273.59\nAIC=553.19   AICc=553.31   BIC=563.08\n\nOutliers:\n  type ind time coefhat tstat\n1   AO  50   50  -5.916 -6.88",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Outliers e INTERVENCIÓN - Pronóstico</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Outliers e Intervención</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P9_Outliers_Quarto.html#simulación-outlier-cambio-de-nivel",
     "href": "SERIES_DE_TIEMPO/P9_Outliers_Quarto.html#simulación-outlier-cambio-de-nivel",
-    "title": "18  Outliers e INTERVENCIÓN - Pronóstico",
+    "title": "18  Outliers e Intervención",
     "section": "18.3 Simulación Outlier cambio de nivel",
     "text": "18.3 Simulación Outlier cambio de nivel\n\nset.seed(12)\nn=500\nserie=arima.sim(n=n,list(ar=0.3))\nserie2=serie\nserie2[100:n]=serie2[100:n]+4 #A partir del dato 100, se mete un cambio de nivel de impactó 4\npar(mfrow=c(1,2))\nplot(serie,ylim=c(-3,7),main=\"Serie original\")\nplot(serie2,ylim=c(-3,7),ylab=\"Serie\")\n\n\n\n\n\n\n\nplot(serie2,ylim=c(-3,7),main=\"Outlier cambio de nivel\")\n\n\n\n\n\n\n\n\n\nfit= Arima(serie2,order=c(1,0,0),include.mean = F)\nfit # Se ve el apalancamiento\n\nSeries: serie2 \nARIMA(1,0,0) with zero mean \n\nCoefficients:\n         ar1\n      0.9455\ns.e.  0.0142\n\nsigma^2 = 1.421:  log likelihood = -797.88\nAIC=1599.75   AICc=1599.78   BIC=1608.18\n\nacf(serie2) #El apalancamiento fue tan grande que hace que la serie parezca estacional, cuando no es estacionaria\n\n\n\n\n\n\n\nresi= residuals(fit)\ncoef= coefs2poly(fit)\noutliers= locate.outliers(resi,coef,cval=5)###cval=3.5 por defecto\noutliers\n\n  type ind  coefhat    tstat\n1   LS 100 4.290489 5.558564\n\nxreg = outliers.effects(outliers, n) #Es la intervención que creabamos en el punto anterior, genera una variable escalón\nhead(xreg); tail(xreg)\n\n     LS100\n[1,]     0\n[2,]     0\n[3,]     0\n[4,]     0\n[5,]     0\n[6,]     0\n\n\n       LS100\n[495,]     1\n[496,]     1\n[497,]     1\n[498,]     1\n[499,]     1\n[500,]     1\n\n#tso(serie2)\n#salida_tso=tso(y=serie2,types=c(\"LS\"))\n#plot(salida_tso$yadj)####Esta serie es sin el efecto de los outliers\n#plot(tso(y=serie2,types=c(\"LS\")))\n#tso(y=serie2,xreg=xreg,tsmethod=\"arima\",args.tsmethod=list(include.mean=FALSE,order=c(1,0,0)))#####Yo especifico el modelo\n\nfit_2=Arima(serie2,order=c(1,0,0),xreg=xreg,include.mean = F)\nresi_2= residuals(fit_2)\ncoef_2= coefs2poly(fit_2)\noutliers_2= locate.outliers(resi_2,coef_2,cval=3.5)###cval=3.5 por defecto\noutliers_2 #Verifico que se haya solucionado el problem de los outliers\n\n[1] type    ind     coefhat tstat  \n&lt;0 rows&gt; (o 0- extensión row.names)\n\n####Hay que repetir el análisis de residuales del modelo.",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Outliers e INTERVENCIÓN - Pronóstico</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Outliers e Intervención</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P9_Outliers_Quarto.html#pronóstico-con-outliers",
     "href": "SERIES_DE_TIEMPO/P9_Outliers_Quarto.html#pronóstico-con-outliers",
-    "title": "18  Outliers e INTERVENCIÓN - Pronóstico",
+    "title": "18  Outliers e Intervención",
     "section": "18.4 Pronóstico con outliers",
     "text": "18.4 Pronóstico con outliers\nPara el pronóstico, debo tener en cuenta los valores futuros de la variable de intervención.\n\n##### Pronóstico \n#fit= Arima(serie2,order=c(1,0,0),include.mean = F)\nfit2= Arima(serie2,order=c(1,0,0),include.mean = F,xreg=xreg)\n#pronostico=  forecast(object=fit,h=15)  #4.093698                      \nregresoras=c(rep(1,15))\npronostico_out=forecast(object=fit2,xreg=regresoras,h=15) \n\nWarning in forecast.forecast_ARIMA(object = fit2, xreg = regresoras, h = 15):\nxreg contains different column names from the xreg used in training. Please\ncheck that the regressors are in the same order.\n\n#par(mfrow=c(1,2))\n#plot(pronostico,ylim=c(-3,7))\nplot(pronostico_out,ylim=c(-3,7)) ###Note la reducción en la varianza de las predicciones \n\n\n\n\n\n\n\n#plot(pronostico$residuals,ylim=c(-3,5))\nplot(pronostico_out$residuals,ylim=c(-3,5))  \n\n\n\n\n\n\n\n#El prónostico ya tuvo en cuenta el dato atípico",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Outliers e INTERVENCIÓN - Pronóstico</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Outliers e Intervención</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P9_Outliers_Quarto.html#ejemplo-serie-de-pasajeros",
     "href": "SERIES_DE_TIEMPO/P9_Outliers_Quarto.html#ejemplo-serie-de-pasajeros",
-    "title": "18  Outliers e INTERVENCIÓN - Pronóstico",
+    "title": "18  Outliers e Intervención",
     "section": "18.5 Ejemplo Serie de Pasajeros",
     "text": "18.5 Ejemplo Serie de Pasajeros\n\nlibrary(lmtest)\n\n\ndata(\"AirPassengers\")\nplot(AirPassengers)\n\n\n\n\n\n\n\nserie &lt;- AirPassengers\najuste=Arima(serie,order=c(0,1,1),seasonal = list(order = c(0, 1, 1)),include.mean=F,lambda =0 )\n# lambda = 0 le añade el logaritmo a la serie\nresi= residuals(ajuste)\nplot(resi)\n\n\n\n\n\n\n\ncoef= coefs2poly(ajuste)\noutliers= locate.outliers(resi,coef)\noutliers\n\n  type ind     coefhat     tstat\n1   AO  29  0.08716944  3.736147\n2   AO  62 -0.08410177 -3.604320\n3   AO 135 -0.10318382 -3.902051\n\nn=length(serie)\nxreg = outliers.effects(outliers,n ) \nhead(xreg); tail(xreg)\n\n     AO29 AO62 AO135\n[1,]    0    0     0\n[2,]    0    0     0\n[3,]    0    0     0\n[4,]    0    0     0\n[5,]    0    0     0\n[6,]    0    0     0\n\n\n       AO29 AO62 AO135\n[139,]    0    0     0\n[140,]    0    0     0\n[141,]    0    0     0\n[142,]    0    0     0\n[143,]    0    0     0\n[144,]    0    0     0\n\n###El siguiente procedimiento busca que al ajustar, en el modelo con el efecto de los outliers, se busquen si hay mas outliers.\nanalisis=Arima(serie,order=c(0,1,1),seasonal = list(order = c(0, 1, 1)),include.mean=F,lambda =0 ,xreg=xreg) #xreg contiene las tres dummies aditivas\nanalisis\n\nSeries: serie \nRegression with ARIMA(0,1,1)(0,1,1)[12] errors \nBox Cox transformation: lambda= 0 \n\nCoefficients:\n          ma1     sma1    AO29     AO62    AO135\n      -0.2898  -0.5246  0.0893  -0.0804  -0.1034\ns.e.   0.0990   0.0746  0.0228   0.0226   0.0257\n\nsigma^2 = 0.001067:  log likelihood = 263.03\nAIC=-514.06   AICc=-513.38   BIC=-496.81\n\ncoeftest(analisis)\n\n\nz test of coefficients:\n\n       Estimate Std. Error z value  Pr(&gt;|z|)    \nma1   -0.289774   0.098960 -2.9282  0.003410 ** \nsma1  -0.524605   0.074572 -7.0349 1.994e-12 ***\nAO29   0.089326   0.022818  3.9148 9.049e-05 ***\nAO62  -0.080432   0.022571 -3.5635  0.000366 ***\nAO135 -0.103417   0.025710 -4.0225 5.759e-05 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nresi_analisis= residuals(analisis)\ncoef_analisis= coefs2poly(analisis)\noutliers_analisis= locate.outliers(resi_analisis,coef_analisis)\noutliers_analisis # Verficar outliers, me aparece un nuevo otlier de cambio de nivel\n\n  type ind     coefhat     tstat\n1   LS  54 -0.09604727 -3.923821\n\nxreg_analisis = outliers.effects(outliers_analisis,n )\n####Se pone \"AO\" en types porque en la localización de outliers únicamente encontró aditivos. Se incluye los efectos de los outliers, así que ahora encontró un outlier cambio de nivel en el tiempo 54.  \ntotal_outliers=cbind(xreg,xreg_analisis)\nanalisis_final=Arima(serie,order=c(0,1,1),seasonal = list(order = c(0, 1, 1)),include.mean=F,lambda =0 ,xreg=total_outliers)\nanalisis_final\n\nSeries: serie \nRegression with ARIMA(0,1,1)(0,1,1)[12] errors \nBox Cox transformation: lambda= 0 \n\nCoefficients:\n          ma1     sma1    AO29     AO62    AO135     LS54\n      -0.3320  -0.4965  0.0959  -0.0803  -0.1032  -0.0967\ns.e.   0.0909   0.0759  0.0218   0.0216   0.0248   0.0249\n\nsigma^2 = 0.0009703:  log likelihood = 270.03\nAIC=-526.06   AICc=-525.15   BIC=-505.93\n\ncoeftest(analisis_final) # Como todos los outliers son significativos se dejan todos\n\n\nz test of coefficients:\n\n       Estimate Std. Error z value  Pr(&gt;|z|)    \nma1   -0.332037   0.090947 -3.6509 0.0002613 ***\nsma1  -0.496497   0.075884 -6.5428 6.038e-11 ***\nAO29   0.095898   0.021830  4.3930 1.118e-05 ***\nAO62  -0.080318   0.021587 -3.7207 0.0001986 ***\nAO135 -0.103224   0.024815 -4.1598 3.186e-05 ***\nLS54  -0.096727   0.024888 -3.8865 0.0001017 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nresi_final= residuals(analisis_final)\ncoef_final= coefs2poly(analisis_final)\noutliers_final= locate.outliers(resi_final,coef_final)\noutliers_final\n\n[1] type    ind     coefhat tstat  \n&lt;0 rows&gt; (o 0- extensión row.names)\n\n###No se encontraron mas outliers\n###Verificar los supuestos del modelo.\n\n\n###Creación de las variable de intervención\npasos_adel=12\nnum_outliers=dim(total_outliers)[2]\nregresoras_aditivos=matrix(c(rep(0,pasos_adel*(num_outliers-1))),pasos_adel,num_outliers-1)\nregresoras_LS=matrix(c(rep(1,pasos_adel)),pasos_adel,1)\nregresoras=cbind(regresoras_aditivos,regresoras_LS)\ncolnames(regresoras)=colnames(total_outliers)\n\npronostico_out=forecast(object=analisis_final,xreg=regresoras,h=pasos_adel) \npronostico_out\n\n         Point Forecast    Lo 80    Hi 80    Lo 95    Hi 95\nJan 1961       449.8404 432.2367 468.1610 423.1985 478.1595\nFeb 1961       424.7048 404.7981 445.5905 394.6407 457.0593\nMar 1961       500.6276 473.8772 528.8880 460.3000 544.4884\nApr 1961       492.0941 462.9524 523.0702 448.2309 540.2497\nMay 1961       508.9298 476.1319 543.9870 459.6342 563.5124\nJun 1961       582.3461 542.0245 625.6673 521.8223 649.8898\nJul 1961       670.5677 621.1525 723.9140 596.4852 753.8510\nAug 1961       666.7261 614.8142 723.0213 588.9904 754.7215\nSep 1961       556.8647 511.3170 606.4696 488.7336 634.4934\nOct 1961       497.1427 454.6262 543.6352 433.6116 569.9820\nNov 1961       428.9600 390.7509 470.9052 371.9219 494.7454\nDec 1961       475.9017 431.8949 524.3925 410.2711 552.0311\n\nplot(pronostico_out)\n\n\n\n\n\n\n\n#Primero se ajusta el modelo y después se busca outliers",
     "crumbs": [
       "SERIES DE TIEMPO",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Outliers e INTERVENCIÓN - Pronóstico</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Outliers e Intervención</span>"
     ]
   },
   {
@@ -1201,6 +1201,149 @@
     "crumbs": [
       "SERIES DE TIEMPO",
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>ACF - Ruido Blanco - Drift</span>"
+    ]
+  },
+  {
+    "objectID": "SERIES_DE_TIEMPO/P1_others_Quarto.html",
+    "href": "SERIES_DE_TIEMPO/P1_others_Quarto.html",
+    "title": "9  Box-Cox - Preblanqueo …",
+    "section": "",
+    "text": "9.1 Parte 1: Transformación Box-Cox\nLa transformación Box-Cox busca estabilizar la varianza y se define como:\n\\[\nY =\n\\begin{cases}\n\\dfrac{X^\\lambda - 1}{\\lambda}, & \\lambda \\neq 0,\\\\[8pt]\n\\log(X), & \\lambda = 0.\n\\end{cases}\n\\]\n# Datos de ejemplo\ndata &lt;- c(1,2,3,4,5,6,7,8,9,10)\n\n# Encontrar λ óptimo para la transformación\noptimal_lambda &lt;- BoxCox.lambda(data, lower = -2)\nprint(optimal_lambda)\n\n[1] 0.9999835\n\n# Gas australiano trimestral (1956Q1–2010Q2)\nGAS &lt;- ts(aus_production$Gas, start = c(1956,1), frequency = 4)\nplot(GAS, type = \"l\", main = \"Producción Trimestral de Gas en Australia\")\n\n# λ óptimo para la serie de gas\noptimal_lambda &lt;- BoxCox.lambda(GAS, lower = -2)\nprint(optimal_lambda)\n\n[1] 0.1095187\n\n# Función de transformación Box-Cox\nbox_cox_transform &lt;- function(x, lambda) {\n  if (lambda == 0) {\n    log(x)\n  } else {\n    (x^lambda - 1) / lambda\n  }\n}\n\n# Aplicar transformación\ntransformed_data &lt;- box_cox_transform(GAS, optimal_lambda)\n\npar(mfrow = c(1,2))\nplot(GAS, type = \"l\", main = \"Producción Trimestral de Gas en Australia\")\nplot(transformed_data, col = \"red\",\n     main = latex2exp::TeX(paste0(\n       \"Producción transformada con $\\\\lambda = \",\n       round(optimal_lambda,2),\"$\")))",
+    "crumbs": [
+      "SERIES DE TIEMPO",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Box-Cox - Preblanqueo ...</span>"
+    ]
+  },
+  {
+    "objectID": "SERIES_DE_TIEMPO/P1_others_Quarto.html#parte-2-análisis-de-tendencia",
+    "href": "SERIES_DE_TIEMPO/P1_others_Quarto.html#parte-2-análisis-de-tendencia",
+    "title": "9  Box-Cox - Preblanqueo …",
+    "section": "9.2 Parte 2: Análisis de Tendencia",
+    "text": "9.2 Parte 2: Análisis de Tendencia\nSe ajusta un modelo lineal de la serie chicken versus el tiempo y se examinan los residuos y diferencias.\n\nlibrary(astsa)\n\n\nAdjuntando el paquete: 'astsa'\n\n\nThe following object is masked from 'package:forecast':\n\n    gas\n\ndata(chicken)\n\nfit &lt;- lm(chicken ~ time(chicken), na.action = NULL)\n\npar(mfrow = c(2,1))\nplot(resid(fit), type = \"o\", main = \"Residuos (serie desestacionalizada)\")\nplot(diff(chicken), type = \"o\", main = \"Primera diferencia\")\n\n\n\n\n\n\n\npar(mfrow = c(3,1))\nacf(chicken, 48, main = \"ACF de chicken\")\nacf(resid(fit), 48, main = \"ACF de residuos\")\nacf(diff(chicken), 48, main = \"ACF de primera diferencia\")",
+    "crumbs": [
+      "SERIES DE TIEMPO",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Box-Cox - Preblanqueo ...</span>"
+    ]
+  },
+  {
+    "objectID": "SERIES_DE_TIEMPO/P1_others_Quarto.html#parte-3-suavizado-en-series-de-tiempo",
+    "href": "SERIES_DE_TIEMPO/P1_others_Quarto.html#parte-3-suavizado-en-series-de-tiempo",
+    "title": "9  Box-Cox - Preblanqueo …",
+    "section": "9.3 Parte 3: Suavizado en Series de Tiempo",
+    "text": "9.3 Parte 3: Suavizado en Series de Tiempo\n\n9.3.1 Media Móvil\n\n# Definir pesos para media móvil centrada\nwgts  &lt;- c(.5, rep(1,11), .5) / 12\n\n# Suavizar el índice SOI con filtro simétrico\nsoif  &lt;- stats::filter(soi, sides = 2, filter = wgts)\n\n# Gráfico principal del índice SOI y su suavizado\nplot(soi, main = \"Índice SOI y su suavizado con media móvil\")\nlines(soif, lwd = 2, col = 4)\n\n# Insertar gráfico de los pesos como inset\n# 1) Guardar parámetros originales\nopar &lt;- par(no.readonly = TRUE)\n\n# 2) Definir la región del inset y márgenes mínimos\npar(fig = c(.65, 1, .65, 1), new = TRUE, mar = c(0, 0, 0, 0))\n\n# 3) Preparar y dibujar el vector de pesos (con relleno)\nnwgts &lt;- c(rep(0, 20), wgts, rep(0, 20))\nplot(nwgts,\n     type = \"l\",\n     ylim = c(-.02, .1),\n     xaxt = \"n\",      # sin ejes x\n     yaxt = \"n\",      # sin ejes y\n     ann = FALSE)     # sin títulos ni etiquetas\n\n\n\n\n\n\n\n# 4) Restaurar parámetros originales\npar(opar)\n\n\n\n9.3.2 Suavizado Kernel\n\nplot(soi, main = \"Suavizado Kernel del SOI\")\nlines(ksmooth(time(soi), soi, \"normal\", bandwidth = 1), lwd = 2, col = 4)\n\n\n\n\n\n\n\n# Insertar núcleo gaussiano\n#par(fig = c(.65,1,.65,1), new = TRUE)\ngauss &lt;- function(x) 1/sqrt(2*pi) * exp(-(x^2)/2)\nxseq  &lt;- seq(-3,3,by = 0.001)\nplot(xseq, gauss(xseq), type = \"l\", ylim = c(-.02,.45), xaxt = 'n', yaxt = 'n', ann = FALSE)\n\n\n\n\n\n\n\n\n\n\n9.3.3 LOWESS\n\nplot(soi, main = \"Suavizado LOWESS del SOI\")\nlines(lowess(soi, f = .05), lwd = 2, col = 4)    # ciclo El Niño\nlines(lowess(soi, f = 2/3), lty = 2, lwd = 2, col = 2)  # tendencia\n\n\n\n\n\n\n\n\n\n\n9.3.4 Splines de Suavizado\n\nplot(soi, main = \"Suavizado con Splines del SOI\")\nlines(smooth.spline(time(soi), soi, spar = .5), lwd = 2, col = 4)  # ciclo\nlines(smooth.spline(time(soi), soi, spar = 1),  lty = 2, lwd = 2, col = 2)  # tendencia",
+    "crumbs": [
+      "SERIES DE TIEMPO",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Box-Cox - Preblanqueo ...</span>"
+    ]
+  },
+  {
+    "objectID": "SERIES_DE_TIEMPO/P1_others_Quarto.html#parte-4-matrices-de-dispersión",
+    "href": "SERIES_DE_TIEMPO/P1_others_Quarto.html#parte-4-matrices-de-dispersión",
+    "title": "9  Box-Cox - Preblanqueo …",
+    "section": "9.4 Parte 4: Matrices de Dispersión",
+    "text": "9.4 Parte 4: Matrices de Dispersión\n\n# Matriz de dispersión de soi contra rezagos\nlag1.plot(soi, 12)\n\n\n\n\n\n\n\nacf(soi, lag.max = 48)\n\n\n\n\n\n\n\n# Matriz de dispersión de rec contra rezagos de soi\nlag2.plot(soi, rec, 8)",
+    "crumbs": [
+      "SERIES DE TIEMPO",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Box-Cox - Preblanqueo ...</span>"
+    ]
+  },
+  {
+    "objectID": "SERIES_DE_TIEMPO/P1_others_Quarto.html#parte-5-función-de-correlación-cruzada-ccf",
+    "href": "SERIES_DE_TIEMPO/P1_others_Quarto.html#parte-5-función-de-correlación-cruzada-ccf",
+    "title": "9  Box-Cox - Preblanqueo …",
+    "section": "9.5 Parte 5: Función de Correlación Cruzada (CCF)",
+    "text": "9.5 Parte 5: Función de Correlación Cruzada (CCF)\n\nccf(soi, rec, lag.max = 48, ylab = \"Correlación Cruzada\")\n\n\n\n\n\n\n\n\n\n9.5.1 Preblanque - Prewhitening and Cross Correlation Analysis - Ejemplo de Shumway y Stoffer (2016)\n\nset.seed(1492)\nnum &lt;- 120; t &lt;- 1:num\nX  &lt;- ts(2*cos(2*pi*t/12) + rnorm(num), freq = 12)\nY  &lt;- ts(2*cos(2*pi*(t+5)/12) + rnorm(num), freq = 12)\nYw &lt;- resid(lm(Y ~ cos(2*pi*t/12) + sin(2*pi*t/12), na.action = NULL))\n\npar(mfrow = c(3,2), mgp = c(1.6,.6,0), mar = c(3,3,1,1))\nplot(X,  main = \"X\")\nplot(Y,  main = \"Y\")\nacf(X, 48, ylab = \"ACF(X)\")\nacf(Y, 48, ylab = \"ACF(Y)\")\nccf(X, Y, 24, ylab = \"CCF(X,Y)\")\nccf(X, Yw,24, ylab = \"CCF(X,Y preblanqueado)\", ylim = c(-.6,.6))",
+    "crumbs": [
+      "SERIES DE TIEMPO",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Box-Cox - Preblanqueo ...</span>"
+    ]
+  },
+  {
+    "objectID": "SERIES_DE_TIEMPO/P1_others_Quarto.html#parte-6-gráficos-estacionales",
+    "href": "SERIES_DE_TIEMPO/P1_others_Quarto.html#parte-6-gráficos-estacionales",
+    "title": "9  Box-Cox - Preblanqueo …",
+    "section": "9.6 Parte 6: Gráficos Estacionales",
+    "text": "9.6 Parte 6: Gráficos Estacionales\n\npar(mfrow = c(2,1))\nplot(AirPassengers, main = \"Pasajeros Mensuales (varianza estabilizada)\")\nplot(diff(log(AirPassengers)), main = \"Diferencia de log(Pasajeros)\")\n\n\n\n\n\n\n\np1 &lt;- ggseasonplot(diff(log(AirPassengers)), year.labels = TRUE, year.labels.left = TRUE) +\n  ylab(\"Número de pasajeros\") +\n  ggtitle(\"Gráfico estacional: AirPassengers\")\n\np2 &lt;- ggsubseriesplot(diff(log(AirPassengers))) +\n  ylab(\"Número de pasajeros\") +\n  ggtitle(\"Subserie estacional: AirPassengers\")\n\nlibrary(gridExtra)\n\n\nAdjuntando el paquete: 'gridExtra'\n\n\nThe following object is masked from 'package:dplyr':\n\n    combine\n\ngrid.arrange(p1, p2, nrow = 2)",
+    "crumbs": [
+      "SERIES DE TIEMPO",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Box-Cox - Preblanqueo ...</span>"
+    ]
+  },
+  {
+    "objectID": "SERIES_DE_TIEMPO/P2_ACF_PACF_para_AR_y_MA_Quarto.html",
+    "href": "SERIES_DE_TIEMPO/P2_ACF_PACF_para_AR_y_MA_Quarto.html",
+    "title": "11  ACF y PACF en ARMA(p,q)",
+    "section": "",
+    "text": "11.1 ACF de modelos AR",
+    "crumbs": [
+      "SERIES DE TIEMPO",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>ACF y PACF en ARMA(p,q)</span>"
+    ]
+  },
+  {
+    "objectID": "SERIES_DE_TIEMPO/P2_ACF_PACF_para_AR_y_MA_Quarto.html#acf-de-modelos-ar",
+    "href": "SERIES_DE_TIEMPO/P2_ACF_PACF_para_AR_y_MA_Quarto.html#acf-de-modelos-ar",
+    "title": "11  ACF y PACF en ARMA(p,q)",
+    "section": "",
+    "text": "11.1.1 AR(1)\n\nrm(list=ls(all=TRUE))\nset.seed(123)\n\n# Simulación AR(1)\nxt &lt;- arima.sim(list(ar = c(0.79)), n = 1000)\nts.plot(xt)\n\n\n\n\n\n\n\nacf(xt)  # Decae de forma exponencial\n\n\n\n\n\n\n\n\n\n\n11.1.2 AR(2)\n\n# Simulación AR(2) con coeficientes 0.8 y -0.55\nxt2 &lt;- arima.sim(list(order = c(2,0,0), ar = c(0.8, -0.55)), n = 1000)\nts.plot(xt2)\n\n\n\n\n\n\n\nacf(xt2)\n\n\n\n\n\n\n\n\n\n\n11.1.3 AR(2) no estacionario (Diapositiva 52)\n\n# Simulación AR(2) con coeficientes 1.5 y -0.75\nxt3 &lt;- arima.sim(list(order = c(2,0,0), ar = c(1.5, -0.75)), n = 1000)\nts.plot(xt3)\n\n\n\n\n\n\n\nacf(xt3)  # Decae de forma sinusoidal",
+    "crumbs": [
+      "SERIES DE TIEMPO",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>ACF y PACF en ARMA(p,q)</span>"
+    ]
+  },
+  {
+    "objectID": "SERIES_DE_TIEMPO/P2_ACF_PACF_para_AR_y_MA_Quarto.html#acf-de-modelos-ma",
+    "href": "SERIES_DE_TIEMPO/P2_ACF_PACF_para_AR_y_MA_Quarto.html#acf-de-modelos-ma",
+    "title": "11  ACF y PACF en ARMA(p,q)",
+    "section": "11.2 ACF de modelos MA",
+    "text": "11.2 ACF de modelos MA\n\n11.2.1 MA(1) positiva\n\nyt1 &lt;- arima.sim(list(ma = c(0.8)), n = 1000)\nts.plot(yt1)\n\n\n\n\n\n\n\nacf(yt1)\n\n\n\n\n\n\n\n\n\n\n11.2.2 MA(1) negativa\n\nyt2 &lt;- arima.sim(list(ma = c(-0.8)), n = 1000)\nts.plot(yt2)\n\n\n\n\n\n\n\nacf(yt2)\n\n\n\n\n\n\n\n\n\n\n11.2.3 MA(2)\n\nyt3 &lt;- arima.sim(list(ma = c(0.9, 0.8)), n = 1000)\nts.plot(yt3)\n\n\n\n\n\n\n\nacf(yt3)",
+    "crumbs": [
+      "SERIES DE TIEMPO",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>ACF y PACF en ARMA(p,q)</span>"
+    ]
+  },
+  {
+    "objectID": "SERIES_DE_TIEMPO/P2_ACF_PACF_para_AR_y_MA_Quarto.html#pacf-de-modelos-ar",
+    "href": "SERIES_DE_TIEMPO/P2_ACF_PACF_para_AR_y_MA_Quarto.html#pacf-de-modelos-ar",
+    "title": "11  ACF y PACF en ARMA(p,q)",
+    "section": "11.3 PACF de modelos AR",
+    "text": "11.3 PACF de modelos AR\n\n11.3.1 AR(1)\n\nxt &lt;- arima.sim(list(ar = c(0.79)), n = 1000)\nts.plot(xt)\n\n\n\n\n\n\n\npar(mfrow = c(1,2))\nacf(xt)\npacf(xt)\n\n\n\n\n\n\n\n\n\n\n11.3.2 AR(2)\n\nxt2 &lt;- arima.sim(list(order = c(2,0,0), ar = c(0.8, -0.55)), n = 1000)\nts.plot(xt2)\n\n\n\n\n\n\n\npar(mfrow = c(1,2))\nacf(xt2)\npacf(xt2)\n\n\n\n\n\n\n\n\n\n\n11.3.3 AR(2) no estacionario\n\nxt3 &lt;- arima.sim(list(order = c(2,0,0), ar = c(1.5, -0.75)), n = 1000)\nts.plot(xt3)\n\n\n\n\n\n\n\npar(mfrow = c(1,2))\nacf(xt3)\npacf(xt3)",
+    "crumbs": [
+      "SERIES DE TIEMPO",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>ACF y PACF en ARMA(p,q)</span>"
+    ]
+  },
+  {
+    "objectID": "SERIES_DE_TIEMPO/P2_ACF_PACF_para_AR_y_MA_Quarto.html#pacf-de-modelos-ma",
+    "href": "SERIES_DE_TIEMPO/P2_ACF_PACF_para_AR_y_MA_Quarto.html#pacf-de-modelos-ma",
+    "title": "11  ACF y PACF en ARMA(p,q)",
+    "section": "11.4 PACF de modelos MA",
+    "text": "11.4 PACF de modelos MA\n\n11.4.1 MA(1) positiva\n\nyt1 &lt;- arima.sim(list(ma = c(0.88)), n = 1000)\nts.plot(yt1)\n\n\n\n\n\n\n\npar(mfrow = c(1,2))\nacf(yt1)\npacf(yt1)\n\n\n\n\n\n\n\n\n\n\n11.4.2 MA(1) negativa\n\nyt2 &lt;- arima.sim(list(ma = c(-0.8)), n = 1000)\nts.plot(yt2)\n\n\n\n\n\n\n\npar(mfrow = c(1,2))\nacf(yt2)\npacf(yt2)\n\n\n\n\n\n\n\n\n\n\n11.4.3 MA(2)\n\nyt3 &lt;- arima.sim(list(ma = c(0.9, 0.8)), n = 1000)\nts.plot(yt3)\n\n\n\n\n\n\n\npar(mfrow = c(1,2))\nacf(yt3)\npacf(yt3)",
+    "crumbs": [
+      "SERIES DE TIEMPO",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>ACF y PACF en ARMA(p,q)</span>"
+    ]
+  },
+  {
+    "objectID": "SERIES_DE_TIEMPO/P2_ACF_PACF_para_AR_y_MA_Quarto.html#ejemplos-adicionales-con-desviación-estándar-distinta",
+    "href": "SERIES_DE_TIEMPO/P2_ACF_PACF_para_AR_y_MA_Quarto.html#ejemplos-adicionales-con-desviación-estándar-distinta",
+    "title": "11  ACF y PACF en ARMA(p,q)",
+    "section": "11.5 Ejemplos adicionales con desviación estándar distinta",
+    "text": "11.5 Ejemplos adicionales con desviación estándar distinta\n\n# AR(2) con sd = 1.5\nxt2 &lt;- arima.sim(list(order = c(2,0,0), ar = c(0.2, 0.55)), sd = 1.5, n = 1000)\n\n# MA(3) con sd = 3\nyt3 &lt;- arima.sim(list(ma = c(0.9, -0.8, -0.8)), sd = 3, n = 1000)\npar(mfrow = c(1,2))\nacf(yt3)\npacf(yt3)",
+    "crumbs": [
+      "SERIES DE TIEMPO",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>ACF y PACF en ARMA(p,q)</span>"
+    ]
+  },
+  {
+    "objectID": "SERIES_DE_TIEMPO/P3_ARMA_estacionariedad_Quarto.html",
+    "href": "SERIES_DE_TIEMPO/P3_ARMA_estacionariedad_Quarto.html",
+    "title": "12  Causal y Estacionario",
+    "section": "",
+    "text": "13 Ejemplo 1: AR(2) proceso causal y estacionario\nPara un proceso AR(2) con polinomio [ (z) = 1 - 0.2,z - 0.48,z^2, ] calculamos sus raíces y verificamos la condición de causalidad (todas las raíces fuera del círculo unitario, (|z_i|&gt;1)).\n\nrm(list = ls(all=TRUE))\n\n# Coeficientes del polinomio en orden ascendente de grado\ncoef &lt;- c(1, -0.2, -0.48)\n\n# Calcular raíces\nraices &lt;- polyroot(coef)\nprint(raices)\n\n[1]  1.250000+3.155444e-30i -1.666667-3.155444e-30i\n\n# Módulos de las raíces\nmodulos_raices &lt;- Mod(raices)\n\n# Verificar causalidad\nif (all(modulos_raices &gt; 1)) {\n  print(\"El proceso AR(2) es causal.\")\n} else {\n  print(\"El proceso AR(2) no es causal.\")\n}\n\n[1] \"El proceso AR(2) es causal.\"\n\n\nInterpretación: si todas las raíces satisfacen (|z_i|&gt;1), el proceso es causal y estacionario.\n\n# Diagrama de Argand (plano complejo)\npar(mfrow = c(1,1))\nplot(0, 0, type=\"n\", xlim=c(-2,2), ylim=c(-2,2),\n     xlab=\"Parte real\", ylab=\"Parte imaginaria\",\n     main=\"Diagrama de Argand para las raíces\")\npoints(Re(raices), Im(raices), col=\"blue\", pch=19)\n\n# Círculo unitario\ntheta &lt;- seq(0, 2*pi, length.out = 100)\nlines(cos(theta), sin(theta), col=\"gray\")\n\n\n\n\n\n\n\n\n\n\n14 Ejemplo 2: AR(2) proceso estacionario pero no causal\nPunteros del polinomio: [ (z) = 1 + 1.5,z - 0.75,z^2. ]\n\n# Coeficientes\ncoef &lt;- c(1, 1.5, -0.75)\n\n# Calcular raíces y módulos\nraices &lt;- polyroot(coef)\nprint(raices)\n\n[1] -0.5275252+0i  2.5275252+0i\n\nmodulos_raices &lt;- Mod(raices)\n\n# Verificar causalidad\nif (all(modulos_raices &gt; 1)) {\n  print(\"El proceso AR(2) es causal.\")\n} else {\n  print(\"El proceso AR(2) no es causal.\")\n}\n\n[1] \"El proceso AR(2) no es causal.\"\n\n\n\n\n15 Ejemplo 3: AR(1) proceso causal y estacionario\nPara AR(1): [ (z) = 1 - 0.8,z. ]\n\n# Coeficientes\ncoef &lt;- c(1, -0.8)\n\n# Calcular raíces y módulos\nraices &lt;- polyroot(coef)\nprint(raices)\n\n[1] 1.25+0i\n\nmodulos_raices &lt;- Mod(raices)\n\n# Verificar causalidad\nif (all(modulos_raices &gt; 1)) {\n  print(\"El proceso AR(1) es causal.\")\n} else {\n  print(\"El proceso AR(1) no es causal.\")\n}\n\n[1] \"El proceso AR(1) es causal.\"",
+    "crumbs": [
+      "SERIES DE TIEMPO",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Causal y Estacionario</span>"
     ]
   }
 ]

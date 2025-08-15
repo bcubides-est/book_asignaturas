@@ -1,5 +1,5 @@
 ---
-title: "Modelo con INTERVENCIÓN (oUTLIERS) - Ajuste ARIMAX"
+title: "Intervención"
 author: "Brayan Cubides"
 toc: true
 toc-location: right

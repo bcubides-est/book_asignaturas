@@ -1,5 +1,5 @@
 ---
-title: "Outliers e INTERVENCIÓN - Pronóstico"
+title: "Outliers e Intervención"
 author: "Brayan Cubides"
 toc: true
 toc-location: right

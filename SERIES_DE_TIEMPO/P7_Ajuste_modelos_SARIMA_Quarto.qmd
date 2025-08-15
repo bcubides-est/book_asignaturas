@@ -1,5 +1,5 @@
 ---
-title: "Ajuste de SARIMA (Completo)"
+title: "Ajuste SARIMA (Completo)"
 author: "Brayan Cubides"
 toc: true
 toc-location: right

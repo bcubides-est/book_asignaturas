@@ -4,7 +4,7 @@ project:
 book:
   title: "MATERIAL DE PREGRADO"
   author: "Brayan Cubides"
-  repo-url: "https://github.com/bcubides-est/actuarial"
+  repo-url: "https://github.com/bcubides-est/book_asignaturas"
   repo-branch: main
   favicon: logo.png
   description: "Material de cada Curso"
@@ -58,3 +58,6 @@ format:
     code-fold: false
     toc-collapse: true  # Listas desplegables contraídas por defecto
     toc-depth: 1
+    execute:
+      output-dir: _book
+    self-contained: false

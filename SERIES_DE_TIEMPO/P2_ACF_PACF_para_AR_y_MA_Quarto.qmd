@@ -1,5 +1,5 @@
 ---
-title: "ACF y PACF en AR(p) y MA(q)"
+title: "ACF y PACF en ARMA(p,q)"
 author: "Brayan Cubides"
 toc: true
 toc-location: right

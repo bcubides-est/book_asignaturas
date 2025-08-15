@@ -1,5 +1,5 @@
 ---
-title: "Causalidad y Estacionariedad en AR(1 y 2)"
+title: "Causal y Estacionario"
 author: "Brayan Cubides"
 toc: true
 toc-location: right

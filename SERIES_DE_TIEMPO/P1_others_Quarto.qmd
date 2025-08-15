@@ -1,5 +1,5 @@
 ---
-title: "Transformación Box-Cox - Suavizado - Preblanqueo - CCF"
+title: "Box-Cox - Preblanqueo ..."
 author: "Brayan Cubides"
 toc: true
 toc-location: right

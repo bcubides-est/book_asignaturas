@@ -6,5 +6,5 @@ title: "Inicio"
 
 Selecciona un curso:
 
-- [ACTUARIAL](CALCULO_ACTUARIAL/index.qmd)
-- [SERIES DE TIEMPO](SERIES_DE_TIEMPO/index.qmd)
+- [ACTUARIAL](CALCULO_ACTUARIAL/Corte-1-Mortalidad/Tablas-de-Mortalidad.qmd)
+- [SERIES DE TIEMPO](SERIES_DE_TIEMPO/P0_Repaso_y_Graf_ST_Quarto.qmd)

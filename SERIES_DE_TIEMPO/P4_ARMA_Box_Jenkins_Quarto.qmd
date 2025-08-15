@@ -1,5 +1,5 @@
 ---
-title: "ARMA - Box-Jenkins - Raiz Unitaria - Diagnóstico - CUSUM y CUSUMQ"
+title: "ARMA - Box-Jenkins"
 author: "Brayan Cubides"
 toc: true
 toc-location: right
