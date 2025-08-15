@@ -30,7 +30,7 @@ book:
       chapters:
         - CALCULO_ACTUARIAL/Corte-1-Mortalidad/Tablas-de-Mortalidad.qmd
         - CALCULO_ACTUARIAL/Corte-1-Mortalidad/Taller-Mortalidad.qmd
-        - CALCULO_ACTUARIAL/Corte-2-Tablas-Amortizacion-Credito/Amortizacion-de-Credito.qmd
+        - CALCULO_ACTUARIAL/Amortizacion-de-Credito.qmd
         - CALCULO_ACTUARIAL/Corte-3-Seguros/Taller-Seguros.qmd
         - CALCULO_ACTUARIAL/Corte-4-Pensiones/Funciones-Pensiones.qmd
     - part: "SERIES DE TIEMPO"
