@@ -1,10 +1,12 @@
 ---
-title: "Inicio"
+title: "INTRODUCCIÓN"
+code-tools: true
+lightbox: true
+toc: true
+toc-location: right
+#number-sections: true
 ---
 
-# Bienvenido {.unnumbered}
+# Bienvenido a la sección de Actuarial {.unnumbered}
 
-Selecciona un curso:
-
-- [ACTUARIAL](CALCULO_ACTUARIAL/Corte-1-Mortalidad/Tablas-de-Mortalidad.qmd)
-- [SERIES DE TIEMPO](SERIES_DE_TIEMPO/P0_Repaso_y_Graf_ST_Quarto.qmd)
+Selecciona el tema que quieras ver.
