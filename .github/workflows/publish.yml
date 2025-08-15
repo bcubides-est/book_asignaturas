@@ -26,20 +26,20 @@ jobs:
       # Nuevos pasos de renderizado divididos
       - name: Render CALCULO_ACTUARIAL - Corte 1
         run: |
-          quarto render CALCULO_ACTUARIAL/Corte-1-Mortalidad/Tablas-de-Mortalidad.qmd --execute
-          quarto render CALCULO_ACTUARIAL/Corte-1-Mortalidad/Taller-Mortalidad.qmd --execute
+          quarto render CALCULO_ACTUARIAL/Tablas-de-Mortalidad.qmd --execute
+          quarto render CALCULO_ACTUARIAL/Taller-Mortalidad.qmd --execute
 
       - name: Render CALCULO_ACTUARIAL - Corte 2
         run: |
-          quarto render CALCULO_ACTUARIAL/Corte-2-Tablas-Amortizacion-Credito/Amortizacion-de-Credito.qmd --execute
+          quarto render CALCULO_ACTUARIAL/Amortizacion-de-Credito.qmd --execute
 
       - name: Render CALCULO_ACTUARIAL - Corte 3
         run: |
-          quarto render CALCULO_ACTUARIAL/Corte-3-Seguros/Taller-Seguros.qmd --execute
+          quarto render CALCULO_ACTUARIAL/Taller-Seguros.qmd --execute
 
       - name: Render CALCULO_ACTUARIAL - Corte 4
         run: |
-          quarto render CALCULO_ACTUARIAL/Corte-4-Pensiones/Funciones-Pensiones.qmd --execute
+          quarto render CALCULO_ACTUARIAL/Funciones-Pensiones.qmd --execute
 
       - name: Render SERIES DE TIEMPO - Parte 1
         run: |

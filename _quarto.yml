@@ -33,6 +33,7 @@ book:
         - CALCULO_ACTUARIAL/Amortizacion-de-Credito.qmd
         - CALCULO_ACTUARIAL/Taller-Seguros.qmd
         - CALCULO_ACTUARIAL/Funciones-Pensiones.qmd
+
     - part: "SERIES DE TIEMPO"
       link: SERIES_DE_TIEMPO/index.qmd
       chapters:
