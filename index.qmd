@@ -7,6 +7,6 @@ toc-location: right
 #number-sections: true
 ---
 
-# Bienvenido a la sección de Actuarial {.unnumbered}
+# Bienvenido a la sección de Actuariall {.unnumbered}
 
 Selecciona el tema que quieras ver.
